@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Database, Radar, Search, Sparkles } from "lucide-react";
+import { ArrowRight, CalendarDays, Database, Radar, Search, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { mockGameMoves } from "@/lib/mock";
 import type { GameMove } from "@/types/contract";
+import { RadarDatabaseView } from "./database-view";
+import { getRadarDatabaseSnapshot, listGameMoves } from "./database";
 
 type RadarPageProps = {
   searchParams?: {
@@ -15,6 +16,7 @@ type RadarPageProps = {
 };
 
 const moveTypes: Array<GameMove["moveType"]> = ["新游", "版本更新", "大版本", "活动"];
+const validMoveTypes = new Set<GameMove["moveType"]>(moveTypes);
 
 const moveTone: Record<GameMove["moveType"], string> = {
   新游: "bg-emerald-50 text-emerald-700 border-emerald-200",
@@ -22,24 +24,6 @@ const moveTone: Record<GameMove["moveType"], string> = {
   大版本: "bg-amber-50 text-amber-700 border-amber-200",
   活动: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
 };
-
-function getFilteredMoves(searchParams: RadarPageProps["searchParams"]) {
-  const query = searchParams?.q?.trim().toLowerCase() ?? "";
-  const type = searchParams?.type;
-
-  return mockGameMoves
-    .filter((move) => {
-      const matchedQuery =
-        !query ||
-        [move.name, move.category, move.summary, move.source].some((field) =>
-          field.toLowerCase().includes(query)
-        );
-      const matchedType = !type || move.moveType === type;
-
-      return matchedQuery && matchedType;
-    })
-    .sort((a, b) => b.date.localeCompare(a.date));
-}
 
 function buildTypeHref(query?: string, type?: GameMove["moveType"]) {
   const params = new URLSearchParams();
@@ -56,11 +40,12 @@ function buildTypeHref(query?: string, type?: GameMove["moveType"]) {
 }
 
 export default function RadarPage({ searchParams }: RadarPageProps) {
-  const moves = getFilteredMoves(searchParams);
-  const selectedType = searchParams?.type;
   const query = searchParams?.q?.trim();
+  const selectedType =
+    searchParams?.type && validMoveTypes.has(searchParams.type) ? searchParams.type : undefined;
+  const moves = listGameMoves({ q: query, type: selectedType });
+  const snapshot = getRadarDatabaseSnapshot({ q: query, type: selectedType });
   const latestMove = moves[0];
-  const uniqueCategories = new Set(mockGameMoves.map((move) => move.category)).size;
 
   return (
     <div className="space-y-6">
@@ -69,44 +54,51 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           <Badge variant="accent" className="w-fit">负责人：Gardner</Badge>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">① 情报雷达</h1>
-            <p className="text-muted-foreground">发现最近有动作的游戏，快速进入诊断与 GIP 消耗链路。</p>
+            <p className="text-muted-foreground">
+              迁移游戏厂商、游戏项目、游戏动态三张表，并映射为 GameMove 给其他模块调用。
+            </p>
           </div>
         </div>
 
         <form action="/radar" className="flex w-full max-w-xl flex-col gap-2 sm:flex-row">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              name="q"
-              placeholder="搜索游戏、品类、来源"
-              defaultValue={query}
-              className="pl-9"
-            />
+            <Input name="q" placeholder="搜索游戏、品类、来源" defaultValue={query} className="pl-9" />
           </div>
           {selectedType ? <input type="hidden" name="type" value={selectedType} /> : null}
           <Button type="submit">筛选</Button>
         </form>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-3">
+      <div className="grid gap-3 md:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">监测动作</CardTitle>
-            <Radar className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">厂商表</CardTitle>
+            <Database className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{mockGameMoves.length}</div>
-            <p className="text-xs text-muted-foreground">来自 GameMove mock 数据</p>
+            <div className="text-2xl font-bold">{snapshot.stats.companyCount}</div>
+            <p className="text-xs text-muted-foreground">companies</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">覆盖品类</CardTitle>
-            <Database className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">游戏项目表</CardTitle>
+            <Table2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{uniqueCategories}</div>
-            <p className="text-xs text-muted-foreground">用于运营优先级判断</p>
+            <div className="text-2xl font-bold">{snapshot.stats.gameCount}</div>
+            <p className="text-xs text-muted-foreground">games</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">动态表</CardTitle>
+            <Radar className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{snapshot.stats.updateCount}</div>
+            <p className="text-xs text-muted-foreground">updates</p>
           </CardContent>
         </Card>
         <Card>
@@ -120,6 +112,23 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>字段映射</CardTitle>
+          <CardDescription>旧库表字段到当前契约 types/contract.ts 的 GameMove 映射。</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2 text-sm md:grid-cols-2">
+            {Object.entries(snapshot.mapping).map(([field, source]) => (
+              <div key={field} className="flex gap-2 rounded-md border bg-card px-3 py-2">
+                <code className="min-w-20 text-accent-foreground">{field}</code>
+                <span className="text-muted-foreground">{source}</span>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="flex flex-wrap gap-2">
         <Link
@@ -145,7 +154,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
 
       <div className="grid gap-4">
         {moves.map((move) => (
-          <Card key={move.gameId}>
+          <Card key={`${move.gameId}-${move.date}-${move.moveType}`}>
             <CardHeader className="gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
@@ -158,7 +167,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
                   <CardDescription>{move.source}</CardDescription>
                 </div>
               </div>
-              <Sparkles className="hidden h-5 w-5 text-muted-foreground sm:block" />
+              <Badge variant="outline">GameMove</Badge>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-sm leading-6">{move.summary}</p>
@@ -189,6 +198,8 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           </CardContent>
         </Card>
       ) : null}
+
+      <RadarDatabaseView initialSnapshot={snapshot} />
     </div>
   );
 }
