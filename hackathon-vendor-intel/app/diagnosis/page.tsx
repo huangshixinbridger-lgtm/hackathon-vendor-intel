@@ -10,7 +10,7 @@ export default function DiagnosisPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">② 平台诊断报告</h1>
-          <p className="text-muted-foreground">平台生态 + 竞品对比 + 推荐营销动作</p>
+          <p className="text-muted-foreground">平台 + 竞品对比 + 推荐营销动作</p>
         </div>
         <Badge variant="accent">负责人：Rena</Badge>
       </div>
