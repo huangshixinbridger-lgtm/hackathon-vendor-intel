@@ -18,11 +18,18 @@ const fadeUp = {
   show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.06, ease: EASE } }),
 };
 
-// Apple Music 式气泡云：紧凑聚类 + 持续轻柔漂浮（纯 CSS 动画，稳定不受 framer 挂载问题影响）
+// Apple Music 式气泡云：紧凑聚类 + 持续轻柔漂浮（纯 CSS 动画）。
+// hover 某个气泡 → 其余气泡朝外散开 + 变暗，被 hover 的放大置顶。
 function BubbleCloud({ types }: { types: ContentTypeBubble[] }) {
+  const [hovered, setHovered] = useState<number | null>(null);
   const sorted = [...types].sort((a, b) => b.vvShare - a.vvShare);
   const GOLDEN = 2.39996323;
   const SPREAD = 60; // 越小越黏（聚类越紧）
+  const SCATTER = 48; // hover 时其余气泡外推距离
+  const pos = sorted.map((_, i) => {
+    const r = SPREAD * Math.sqrt(i);
+    return { tx: Math.cos(i * GOLDEN) * r, ty: Math.sin(i * GOLDEN) * r };
+  });
   return (
     <div className="relative mx-auto h-[440px] w-full max-w-2xl">
       <style>{`
@@ -32,19 +39,38 @@ function BubbleCloud({ types }: { types: ContentTypeBubble[] }) {
       `}</style>
       {sorted.map((t, i) => {
         const d = 100 + t.vvShare * 360; // 直径 ~130–185
-        const r = SPREAD * Math.sqrt(i);
-        const tx = Math.cos(i * GOLDEN) * r;
-        const ty = Math.sin(i * GOLDEN) * r;
+        const { tx, ty } = pos[i];
         const fill = 0.06 + t.vvShare * 0.5; // 越大越实
+        const isHover = hovered === i;
+        let sx = 0, sy = 0;
+        if (hovered !== null && !isHover) {
+          const h = pos[hovered];
+          const dx = tx - h.tx, dy = ty - h.ty;
+          const len = Math.hypot(dx, dy) || 1;
+          sx = (dx / len) * SCATTER;
+          sy = (dy / len) * SCATTER;
+        }
+        const dimmed = hovered !== null && !isHover;
         return (
           <div
             key={t.tag}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
             className="absolute"
-            style={{ left: `calc(50% + ${tx}px)`, top: `calc(50% + ${ty}px)`, transform: "translate(-50%,-50%)", width: d, height: d }}
+            style={{
+              left: `calc(50% + ${tx}px)`,
+              top: `calc(50% + ${ty}px)`,
+              width: d,
+              height: d,
+              transform: `translate(calc(-50% + ${sx}px), calc(-50% + ${sy}px)) scale(${isHover ? 1.08 : 1})`,
+              opacity: dimmed ? 0.28 : 1,
+              zIndex: isHover ? 10 : 1,
+              transition: "transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease",
+            }}
           >
             <div
               title={t.note}
-              className="flex h-full w-full cursor-default flex-col items-center justify-center rounded-full border border-indigo-500/25 transition-[scale] duration-200 hover:scale-105"
+              className="flex h-full w-full cursor-default flex-col items-center justify-center rounded-full border border-indigo-500/25"
               style={{
                 backgroundColor: `rgba(99,102,241,${fill})`,
                 animation: `ffIn .6s ease ${i * 0.09}s both, ${i % 2 ? "ffFloat2" : "ffFloat"} ${3.4 + i * 0.5}s ease-in-out ${0.6 + i * 0.09}s infinite`,
