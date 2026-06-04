@@ -30,9 +30,7 @@ const tableConfigs: TableConfig[] = [
     title: "游戏项目表",
     columns: [
       ["name", "游戏"],
-      ["companyName", "公司"],
-      ["publisher", "发行商"],
-      ["developer", "开发商"],
+      ["vendorName", "游戏厂商"],
       ["stage", "阶段"],
       ["releaseDate", "Release"],
       ["genres", "品类"],
@@ -49,9 +47,7 @@ const tableConfigs: TableConfig[] = [
     title: "游戏厂商表",
     columns: [
       ["name", "厂商"],
-      ["region", "区域"],
-      ["headquartersCountry", "主要国家/地区"],
-      ["aliases", "别名"],
+      ["marketRegion", "区域/国家地区"],
       ["description", "描述"],
       ["website", "官网"],
       ["wikipediaUrl", "Wikipedia"],
@@ -77,6 +73,21 @@ function pickRows(snapshot: RadarDatabaseSnapshot, table: RadarTableName) {
 }
 
 function renderCell(row: Record<string, unknown>, key: string) {
+  if (key === "vendorName") {
+    return <span className="line-clamp-3">{formatValue(row.publisher || row.developer || row.companyName)}</span>;
+  }
+
+  if (key === "marketRegion") {
+    const region = formatValue(row.region);
+    const country = formatValue(row.headquartersCountry);
+    const value = [region, country].filter((item, index, list) => item && list.indexOf(item) === index).join(" / ");
+    return <span className="line-clamp-3">{value}</span>;
+  }
+
+  if ((key === "updatedAt" || key === "createdAt") && typeof row[key] === "string") {
+    return <span>{row[key].slice(0, 10)}</span>;
+  }
+
   if (key === "source" && typeof row.source === "string" && typeof row.sourceUrl === "string" && row.sourceUrl) {
     return (
       <a className="text-accent-foreground hover:underline" href={row.sourceUrl} target="_blank" rel="noreferrer">
