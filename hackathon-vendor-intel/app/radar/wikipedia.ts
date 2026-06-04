@@ -17,6 +17,11 @@ export type WikipediaGameInfo = {
 
 export type WikipediaBackfillResult = {
   mode: WikipediaBackfillMode;
+  total: number;
+  offset: number;
+  limit: number;
+  nextOffset: number | null;
+  done: boolean;
   checked: number;
   updated: number;
   skipped: number;

@@ -556,15 +556,24 @@ export async function runRadarRefresh(): Promise<RefreshResult> {
 
 export async function runWikipediaGameBackfill(
   mode: WikipediaBackfillMode = "incremental",
-  limit?: number
+  limit = 25,
+  offset = 0
 ): Promise<WikipediaBackfillResult> {
   const candidates = games.filter((game) => shouldUpdateWikipediaGame(game, mode));
-  const selectedGames = Number.isFinite(limit) && limit && limit > 0 ? candidates.slice(0, limit) : candidates;
+  const normalizedLimit = Number.isFinite(limit) && limit > 0 ? Math.min(limit, 50) : 25;
+  const normalizedOffset = Number.isFinite(offset) && offset > 0 ? offset : 0;
+  const selectedGames = candidates.slice(normalizedOffset, normalizedOffset + normalizedLimit);
+  const nextOffset = normalizedOffset + selectedGames.length;
   const result: WikipediaBackfillResult = {
     mode,
+    total: candidates.length,
+    offset: normalizedOffset,
+    limit: normalizedLimit,
+    nextOffset: nextOffset < candidates.length ? nextOffset : null,
+    done: nextOffset >= candidates.length,
     checked: 0,
     updated: 0,
-    skipped: games.length - selectedGames.length,
+    skipped: candidates.length - selectedGames.length,
     failed: 0,
     failures: [],
   };

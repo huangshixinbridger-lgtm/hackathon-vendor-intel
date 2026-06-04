@@ -1,6 +1,6 @@
 {
   "importedFrom": "/Users/bytedance/Documents/GameMoveTest/data/game_tracker.sqlite3",
-  "importedAt": "2026-06-04T13:27:24.064Z",
+  "importedAt": "2026-06-04T13:32:10.312Z",
   "companies": [
     {
       "id": "1",
@@ -1006,7 +1006,7 @@
       "releaseRegions": [
         "全球"
       ],
-      "stage": "预约中",
+      "stage": "正式上线",
       "expectedLaunchDate": "",
       "genres": [
         "RPG",
@@ -1017,7 +1017,10 @@
       "ttNotes": "",
       "latestProgress": "",
       "officialSite": "",
-      "platforms": [],
+      "platforms": [
+        "Nintendo Switch",
+        "Nintendo Switch 2"
+      ],
       "relevanceScore": 60,
       "relevanceReasons": [
         "配置 watchlist 收录"
@@ -1026,7 +1029,14 @@
       "isBackfilled": false,
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00"
+      "updatedAt": "2026-06-04T13:32:10.311Z",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Legends:_Z-A",
+      "wikipediaTitle": "Pokémon Legends: Z-A",
+      "wikipediaDescription": "2025 video game",
+      "publisher": "The Pokémon Company / Nintendo",
+      "developer": "Game Freak",
+      "releaseDate": "2025-10-16",
+      "wikipediaLastCheckedAt": "2026-06-04T13:32:10.311Z"
     },
     {
       "id": "3",
