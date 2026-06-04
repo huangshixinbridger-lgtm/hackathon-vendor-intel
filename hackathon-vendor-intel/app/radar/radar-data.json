@@ -1,6 +1,6 @@
 {
   "importedFrom": "/Users/bytedance/Documents/GameMoveTest/data/game_tracker.sqlite3",
-  "importedAt": "2026-06-04T07:02:01.319Z",
+  "importedAt": "2026-06-04T10:01:53.964Z",
   "companies": [
     {
       "id": "1",
@@ -253,7 +253,8 @@
       "id": "15",
       "name": "NetEase Games",
       "aliases": [
-        "NetEase"
+        "NetEase",
+        "网易"
       ],
       "region": "China",
       "headquartersCountry": "China",
@@ -261,7 +262,7 @@
       "website": "https://www.163.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-04T10:01:53.964Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/NetEase",
       "wikipediaTitle": "NetEase",
       "wikipediaDescription": "Chinese Internet technology company"
@@ -925,6 +926,21 @@
       "feishuRecordId": "",
       "createdAt": "2026-06-01T04:23:08+00:00",
       "updatedAt": "2026-06-01T04:23:08+00:00"
+    },
+    {
+      "id": "192",
+      "name": "Starry Studio",
+      "aliases": [],
+      "region": "全球",
+      "headquartersCountry": "全球",
+      "description": "Chinese video game developer and publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Starry Studio",
+      "wikipediaDescription": "Chinese video game developer and publisher",
+      "createdAt": "2026-06-04T10:01:53.964Z",
+      "updatedAt": "2026-06-04T10:01:53.964Z"
     }
   ],
   "games": [
@@ -8290,22 +8306,31 @@
     {
       "id": "411",
       "name": "燕云十六声 Where Winds Meet",
-      "aliases": [],
-      "companyId": "187",
+      "aliases": [
+        "Where Winds Meet",
+        "燕云十六声"
+      ],
+      "companyId": "15",
       "releaseRegions": [
         "全球"
       ],
-      "stage": "长线运营",
-      "expectedLaunchDate": "",
+      "stage": "正式上线",
+      "expectedLaunchDate": "2025-12-12",
       "genres": [
-        "Open World-开放世界"
+        "Open World-开放世界",
+        "action role-playing game"
       ],
-      "otherInfo": "3A 武侠开放世界",
+      "otherInfo": "3A 武侠开放世界\nWikipedia/Wikidata：Release dates: 2024-12-27, 2025-01-09, 2025-11-14, 2025-12-12；Platforms: Microsoft Windows, PlayStation 5, Android, iOS；Genres: action role-playing game",
       "ttOperationStatus": "未知",
       "ttNotes": "",
-      "latestProgress": "2026-06-01｜飞书多维表格导入",
+      "latestProgress": "2026-06-04｜Wikipedia/Wikidata 补全：Release dates: 2024-12-27, 2025-01-09, 2025-11-14, 2025-12-12；Publisher: NetEase；Developer: Everstone Games",
       "officialSite": "",
-      "platforms": [],
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Android",
+        "iOS"
+      ],
       "relevanceScore": 100,
       "relevanceReasons": [
         "飞书多维表格导入"
@@ -8314,7 +8339,13 @@
       "isBackfilled": true,
       "feishuRecordId": "",
       "createdAt": "2026-06-01T04:23:08+00:00",
-      "updatedAt": "2026-06-01T04:23:08+00:00"
+      "updatedAt": "2026-06-04T10:01:53.964Z",
+      "releaseDate": "2025-12-12",
+      "publisher": "NetEase",
+      "developer": "Everstone Games",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Where_Winds_Meet",
+      "wikipediaTitle": "Where Winds Meet",
+      "wikipediaDescription": "2024 video game developed by Everstone Games"
     },
     {
       "id": "412",
@@ -9164,6 +9195,97 @@
       "feishuRecordId": "",
       "createdAt": "2026-06-01T19:26:50+00:00",
       "updatedAt": "2026-06-01T19:26:50+00:00"
+    },
+    {
+      "id": "448",
+      "name": "蛋仔派对 Eggy Party",
+      "aliases": [
+        "Eggy Party",
+        "蛋仔派对"
+      ],
+      "companyId": "15",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "2024-07-19",
+      "genres": [
+        "party game"
+      ],
+      "otherInfo": "Wikipedia/Wikidata：Release dates: 2022-05-27, 2024-02-23, 2024-07-19；Platforms: iOS, iPadOS, Android, Nintendo Switch；Genres: party game",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "2026-06-04｜Wikipedia/Wikidata 补全：Release dates: 2022-05-27, 2024-02-23, 2024-07-19；Publisher: 未知；Developer: NetEase",
+      "officialSite": "",
+      "platforms": [
+        "iOS",
+        "iPadOS",
+        "Android",
+        "Nintendo Switch"
+      ],
+      "relevanceScore": 60,
+      "relevanceReasons": [
+        "Wikipedia / Wikidata 补充"
+      ],
+      "discoverySource": "Wikipedia / Wikidata",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "createdAt": "2026-06-04T10:01:53.964Z",
+      "updatedAt": "2026-06-04T10:01:53.964Z",
+      "releaseDate": "2024-07-19",
+      "publisher": "",
+      "developer": "NetEase",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Eggy_Party",
+      "wikipediaTitle": "Eggy Party",
+      "wikipediaDescription": "2022 video game"
+    },
+    {
+      "id": "449",
+      "name": "七日世界 Once Human",
+      "aliases": [
+        "Once Human",
+        "七日世界"
+      ],
+      "companyId": "192",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "2025-04-23",
+      "genres": [
+        "survival game",
+        "shooter game",
+        "massively multiplayer online game",
+        "horror video game",
+        "third-person shooter"
+      ],
+      "otherInfo": "Wikipedia/Wikidata：Release dates: 2024-07-09, 2025-04-23；Platforms: Microsoft Windows, iOS, Android, PlayStation 5, Xbox Series X and Series S；Genres: survival game, shooter game, massively multiplayer online game, horror video game, third-person shooter",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "2026-06-04｜Wikipedia/Wikidata 补全：Release dates: 2024-07-09, 2025-04-23；Publisher: Starry Studio；Developer: Starry Studio",
+      "officialSite": "",
+      "platforms": [
+        "Microsoft Windows",
+        "iOS",
+        "Android",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 60,
+      "relevanceReasons": [
+        "Wikipedia / Wikidata 补充"
+      ],
+      "discoverySource": "Wikipedia / Wikidata",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "createdAt": "2026-06-04T10:01:53.964Z",
+      "updatedAt": "2026-06-04T10:01:53.964Z",
+      "releaseDate": "2025-04-23",
+      "publisher": "Starry Studio",
+      "developer": "Starry Studio",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Once_Human_(video_game)",
+      "wikipediaTitle": "Once Human (video game)",
+      "wikipediaDescription": "2024 video game developed by Starry Studio"
     }
   ],
   "updates": [
