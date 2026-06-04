@@ -221,9 +221,9 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
             <Radar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-3">
-            <div className="text-2xl font-bold">{intelligenceItems.length}</div>
+            <div className="text-2xl font-bold">{snapshot.stats.updateCount}</div>
             <p className="text-xs text-muted-foreground">
-              当前周期：{dateWindows.find((item) => item.value === selectedWindow)?.label}
+              updates · 当前周期 {dateWindows.find((item) => item.value === selectedWindow)?.label}：{intelligenceItems.length} 条
             </p>
             <div className="flex flex-wrap gap-2">
               {dateWindows.map((item) => (
