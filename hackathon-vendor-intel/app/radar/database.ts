@@ -1,4 +1,6 @@
 import type { GameMove } from "@/types/contract";
+import { readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
 import radarData from "./radar-data.json";
 
 export type VendorCompany = {
@@ -10,6 +12,9 @@ export type VendorCompany = {
   description: string;
   website: string;
   feishuRecordId?: string;
+  wikipediaUrl?: string;
+  wikipediaTitle?: string;
+  wikipediaDescription?: string;
   createdAt?: string;
   updatedAt: string;
 };
@@ -34,6 +39,9 @@ export type GameProject = {
   discoverySource: string;
   isBackfilled?: boolean;
   feishuRecordId?: string;
+  wikipediaUrl?: string;
+  wikipediaTitle?: string;
+  wikipediaDescription?: string;
   createdAt?: string;
   updatedAt: string;
 };
@@ -95,6 +103,21 @@ export type DailySummary = {
   items: IntelligenceItem[];
 };
 
+export type TodaySummaryStats = {
+  date: string;
+  updateCount: number;
+  gameNames: string[];
+  companyNames: string[];
+  topItems: IntelligenceItem[];
+};
+
+export type RefreshResult = {
+  inserted: number;
+  skipped: number;
+  date: string;
+  sources: string[];
+};
+
 export type RadarFilters = {
   q?: string | null;
   type?: GameMove["moveType"] | null;
@@ -110,7 +133,17 @@ type ImportedRadarData = {
   updates: Omit<GameUpdate, "updateType">[];
 };
 
-const imported = radarData as ImportedRadarData;
+const dataPath = path.join(process.cwd(), "app/radar/radar-data.json");
+
+function loadImportedData(): ImportedRadarData {
+  try {
+    return JSON.parse(readFileSync(dataPath, "utf8")) as ImportedRadarData;
+  } catch {
+    return radarData as ImportedRadarData;
+  }
+}
+
+const imported = loadImportedData();
 
 const companies = imported.companies;
 const games = imported.games;
@@ -229,6 +262,24 @@ const updates: GameUpdate[] = imported.updates.map((update) => {
     updateType: game ? inferMoveType(game, update) : "版本更新",
   };
 });
+
+function saveImportedData() {
+  writeFileSync(
+    dataPath,
+    `${JSON.stringify(
+      {
+        ...(imported as object),
+        importedAt: new Date().toISOString(),
+        companies,
+        games,
+        updates: imported.updates,
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+}
 
 function findGame(gameId: string) {
   return gameById.get(gameId);
@@ -359,6 +410,169 @@ export function getDailySummaries(): DailySummary[] {
       items: items.sort((a, b) => b.importance - a.importance || b.date.localeCompare(a.date)),
     }))
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function getTodaySummaryStats(): TodaySummaryStats {
+  const date = getLatestUpdateDate();
+  const items = listIntelligenceItems({ dateWindow: "all" }).filter((item) => item.date === date);
+  const gameNames = Array.from(
+    new Set(items.filter((item) => item.category !== "厂商动态").map((item) => item.name).filter(Boolean))
+  ).sort();
+  const companyNames = Array.from(new Set(items.map((item) => item.companyName).filter(Boolean))).sort();
+
+  return {
+    date,
+    updateCount: items.length,
+    gameNames,
+    companyNames,
+    topItems: items.slice(0, 5),
+  };
+}
+
+const rssSources = [
+  { name: "GamesIndustry.biz", url: "https://www.gamesindustry.biz/feed" },
+  { name: "PocketGamer.biz", url: "https://www.pocketgamer.biz/rss/" },
+  { name: "Gematsu", url: "https://www.gematsu.com/feed" },
+  { name: "Game Developer", url: "https://www.gamedeveloper.com/rss.xml" },
+];
+
+function decodeXml(value: string) {
+  return value
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .trim();
+}
+
+function pickXmlValue(item: string, tag: string) {
+  return decodeXml(item.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"))?.[1] ?? "");
+}
+
+function matchKnownEntity(text: string) {
+  const normalized = text.toLowerCase();
+  const game = games.find((candidate) =>
+    [candidate.name, ...candidate.aliases].some((name) => name && normalized.includes(name.toLowerCase()))
+  );
+  const company = game
+    ? findCompany(game.companyId)
+    : companies.find((candidate) =>
+        [candidate.name, ...candidate.aliases].some((name) => name && normalized.includes(name.toLowerCase()))
+      );
+
+  return { game, company };
+}
+
+function createContentHash(value: string) {
+  let hash = 0;
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 31 + value.charCodeAt(index)) >>> 0;
+  }
+  return `rss-${hash.toString(16)}`;
+}
+
+export async function runRadarRefresh(): Promise<RefreshResult> {
+  const today = new Date().toISOString().slice(0, 10);
+  const knownHashes = new Set(imported.updates.map((update) => update.contentHash).filter(Boolean));
+  let inserted = 0;
+  let skipped = 0;
+
+  for (const source of rssSources) {
+    try {
+      const response = await fetch(source.url, { cache: "no-store" });
+      const xml = await response.text();
+      const items = Array.from(xml.matchAll(/<item\b[\s\S]*?<\/item>/gi)).slice(0, 12);
+
+      for (const match of items) {
+        const raw = match[0];
+        const title = pickXmlValue(raw, "title");
+        const link = pickXmlValue(raw, "link") || pickXmlValue(raw, "guid");
+        const description = pickXmlValue(raw, "description").replace(/<[^>]+>/g, " ");
+        const publishedAt = pickXmlValue(raw, "pubDate");
+        const contentHash = createContentHash(`${source.name}|${link || title}`);
+
+        if (!title || knownHashes.has(contentHash)) {
+          skipped += 1;
+          continue;
+        }
+
+        const { game, company } = matchKnownEntity(`${title} ${description}`);
+        const rawUpdate: Omit<GameUpdate, "updateType"> = {
+          id: String(Math.max(0, ...imported.updates.map((update) => Number(update.id) || 0)) + inserted + 1),
+          summary: title,
+          updateDate: today,
+          gameId: game?.id ?? "",
+          companyId: company?.id ?? game?.companyId ?? "",
+          detail: description || title,
+          sourceUrl: link,
+          sourceName: source.name,
+          sourcePublishedAt: publishedAt,
+          contentHash,
+          importance: 2,
+          feishuRecordId: "",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        };
+        const inferredUpdate: GameUpdate = {
+          ...rawUpdate,
+          importance: inferImportance(rawUpdate, game),
+          updateType: game ? inferMoveType(game, rawUpdate) : "版本更新",
+        };
+
+        imported.updates.push(rawUpdate);
+        updates.push(inferredUpdate);
+        knownHashes.add(contentHash);
+        inserted += 1;
+      }
+    } catch {
+      skipped += 1;
+    }
+  }
+
+  if (inserted > 0) {
+    saveImportedData();
+  }
+
+  return {
+    inserted,
+    skipped,
+    date: today,
+    sources: rssSources.map((source) => source.name),
+  };
+}
+
+export function ensureRadarScheduler() {
+  const globalState = globalThis as typeof globalThis & {
+    __radarSchedulerStarted?: boolean;
+    __radarSchedulerLastRun?: string;
+  };
+
+  if (globalState.__radarSchedulerStarted) {
+    return;
+  }
+
+  globalState.__radarSchedulerStarted = true;
+  setInterval(() => {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("zh-CN", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    }).formatToParts(now);
+    const get = (type: string) => parts.find((part) => part.type === type)?.value ?? "";
+    const runKey = `${get("year")}-${get("month")}-${get("day")}`;
+
+    if (get("hour") === "00" && get("minute") === "00" && globalState.__radarSchedulerLastRun !== runKey) {
+      globalState.__radarSchedulerLastRun = runKey;
+      void runRadarRefresh();
+    }
+  }, 60 * 1000);
 }
 
 export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatabaseSnapshot {

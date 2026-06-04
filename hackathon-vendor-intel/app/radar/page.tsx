@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Database, Radar, Search, Table2 } from "lucide-react";
+import { ArrowRight, Database, Radar, Search, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,11 +7,13 @@ import { Input } from "@/components/ui/input";
 import type { GameMove } from "@/types/contract";
 import { RadarDatabaseView } from "./database-view";
 import {
+  ensureRadarScheduler,
   getRadarDatabaseSnapshot,
-  getTodayHighlights,
+  getTodaySummaryStats,
   listIntelligenceItems,
   type DateWindow,
 } from "./database";
+import { RadarRefreshButton } from "./refresh-button";
 
 type RadarPageProps = {
   searchParams?: {
@@ -25,9 +27,9 @@ type RadarPageProps = {
 const validDateWindows = new Set<DateWindow>(["24h", "7d", "30d", "all"]);
 
 const dateWindows: Array<{ value: DateWindow; label: string }> = [
+  { value: "30d", label: "近 30 天" },
   { value: "7d", label: "近 7 天" },
   { value: "24h", label: "近 24 小时" },
-  { value: "30d", label: "近 30 天" },
   { value: "all", label: "全部" },
 ];
 
@@ -43,18 +45,33 @@ function parseMinImportance(value?: string) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
+function buildWindowHref(dateWindow: DateWindow, query?: string, minImportance?: number, gameId?: string) {
+  const params = new URLSearchParams();
+  params.set("window", dateWindow);
+  if (query) {
+    params.set("q", query);
+  }
+  if (minImportance) {
+    params.set("importance", String(minImportance));
+  }
+  if (gameId) {
+    params.set("gameId", gameId);
+  }
+  return `/radar?${params.toString()}`;
+}
+
 export default function RadarPage({ searchParams }: RadarPageProps) {
+  ensureRadarScheduler();
+
   const query = searchParams?.q?.trim();
   const selectedWindow =
-    searchParams?.window && validDateWindows.has(searchParams.window) ? searchParams.window : "7d";
+    searchParams?.window && validDateWindows.has(searchParams.window) ? searchParams.window : "30d";
   const minImportance = parseMinImportance(searchParams?.importance);
   const selectedGameId = searchParams?.gameId?.trim();
   const filters = { q: query, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
   const intelligenceItems = listIntelligenceItems(filters);
   const snapshot = getRadarDatabaseSnapshot(filters);
-  const highlights = getTodayHighlights();
-  const summaryItems = listIntelligenceItems({ dateWindow: selectedWindow });
-  const latestMove = intelligenceItems[0];
+  const todaySummary = getTodaySummaryStats();
   const highImportanceCount = intelligenceItems.filter((item) => item.importance >= 4).length;
 
   return (
@@ -69,6 +86,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
             </p>
           </div>
         </div>
+        <RadarRefreshButton />
 
         <form action="/radar" className="flex w-full max-w-3xl flex-col gap-2 lg:flex-row">
           <div className="relative flex-1">
@@ -106,7 +124,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           <div>
             <CardTitle>今日摘要</CardTitle>
             <CardDescription>
-              先看最重要几条，也可以展开扫当前时间窗的全部摘要信息。
+              {todaySummary.date} 新增动态、覆盖游戏和厂商信息，列表展示 5 条最重要摘要。
             </CardDescription>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -120,42 +138,63 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-3 lg:grid-cols-3">
-            {highlights.map((item) => (
+          <div className="grid gap-3 md:grid-cols-3">
+            <a href="#today-updates" className="rounded-md border bg-card px-3 py-3 transition-colors hover:bg-accent">
+              <div className="text-sm text-muted-foreground">今日新增动态</div>
+              <div className="mt-1 text-2xl font-bold">{todaySummary.updateCount}</div>
+            </a>
+            <a href="#today-games" className="rounded-md border bg-card px-3 py-3 transition-colors hover:bg-accent">
+              <div className="text-sm text-muted-foreground">涉及游戏</div>
+              <div className="mt-1 text-2xl font-bold">{todaySummary.gameNames.length}</div>
+            </a>
+            <a href="#today-companies" className="rounded-md border bg-card px-3 py-3 transition-colors hover:bg-accent">
+              <div className="text-sm text-muted-foreground">涉及厂商</div>
+              <div className="mt-1 text-2xl font-bold">{todaySummary.companyNames.length}</div>
+            </a>
+          </div>
+
+          <div id="today-updates" className="rounded-md border">
+            <div className="border-b bg-muted px-3 py-2 text-sm font-medium">重要摘要 Top 5</div>
+            <div className="divide-y">
+              {todaySummary.topItems.map((item) => (
               <a
                 key={`highlight-${item.id}`}
                 href={`#move-${item.id}`}
-                className="rounded-md border bg-card px-3 py-3 text-sm transition-colors hover:bg-accent"
+                className="grid gap-1 px-3 py-3 text-sm hover:bg-accent md:grid-cols-[96px_120px_1fr]"
               >
-                <div className="mb-2 flex items-center gap-2">
+                <span className="text-muted-foreground">{item.date}</span>
+                <span className="flex items-center gap-2">
                   <Badge className={`border ${moveTone[item.moveType]}`}>{item.moveType}</Badge>
-                  <span className="text-xs text-muted-foreground">重要度 {item.importance}</span>
-                </div>
-                <div className="line-clamp-2 font-medium">{item.name}</div>
-                <p className="mt-1 line-clamp-2 text-muted-foreground">{item.summary}</p>
+                  <span className="text-xs text-muted-foreground">{item.importance}</span>
+                </span>
+                <span className="line-clamp-1">{item.name}：{item.summary}</span>
               </a>
             ))}
-          </div>
-          <div className="rounded-md border">
-            <div className="border-b bg-muted px-3 py-2 text-sm font-medium">全部摘要信息</div>
-            <div className="max-h-72 overflow-y-auto">
-              {summaryItems.map((item) => (
-                <a
-                  key={`summary-${item.id}`}
-                  href={`#move-${item.id}`}
-                  className="grid gap-1 border-b px-3 py-3 text-sm last:border-b-0 hover:bg-accent md:grid-cols-[96px_120px_1fr]"
-                >
-                  <span className="text-muted-foreground">{item.date}</span>
-                  <span>{item.moveType} · 重要度 {item.importance}</span>
-                  <span className="line-clamp-1">{item.name}：{item.summary}</span>
-                </a>
-              ))}
             </div>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            <details id="today-games" className="rounded-md border bg-card px-3 py-3">
+              <summary className="cursor-pointer text-sm font-medium">查看新增/涉及游戏名称</summary>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {todaySummary.gameNames.map((name) => (
+                  <Badge key={name} variant="outline">{name}</Badge>
+                ))}
+              </div>
+            </details>
+            <details id="today-companies" className="rounded-md border bg-card px-3 py-3">
+              <summary className="cursor-pointer text-sm font-medium">查看新增/涉及厂商名称</summary>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {todaySummary.companyNames.map((name) => (
+                  <Badge key={name} variant="outline">{name}</Badge>
+                ))}
+              </div>
+            </details>
           </div>
         </CardContent>
       </Card>
 
-      <div className="grid gap-3 md:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">厂商表</CardTitle>
@@ -181,19 +220,24 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
             <CardTitle className="text-sm font-medium">情报流</CardTitle>
             <Radar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-3">
             <div className="text-2xl font-bold">{intelligenceItems.length}</div>
-            <p className="text-xs text-muted-foreground">当前筛选结果</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">最新动作</CardTitle>
-            <CalendarDays className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="truncate text-2xl font-bold">{latestMove?.date ?? "-"}</div>
-            <p className="truncate text-xs text-muted-foreground">{latestMove?.name ?? "暂无匹配结果"}</p>
+            <p className="text-xs text-muted-foreground">
+              当前周期：{dateWindows.find((item) => item.value === selectedWindow)?.label}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {dateWindows.map((item) => (
+                <Link
+                  key={item.value}
+                  href={buildWindowHref(item.value, query, minImportance, selectedGameId)}
+                  className={`rounded-md border px-2.5 py-1 text-xs transition-colors ${
+                    selectedWindow === item.value ? "bg-primary text-primary-foreground" : "bg-card hover:bg-accent"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </CardContent>
         </Card>
       </div>

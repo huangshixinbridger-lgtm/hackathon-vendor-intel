@@ -37,7 +37,10 @@ const tableConfigs: TableConfig[] = [
       ["companyName", "公司"],
       ["stage", "阶段"],
       ["genres", "品类"],
+      ["platforms", "平台"],
       ["releaseRegions", "区域"],
+      ["officialSite", "官网"],
+      ["wikipediaUrl", "Wikipedia"],
       ["latestProgress", "最新进展"],
       ["relevanceScore", "关注度"],
     ],
@@ -51,6 +54,8 @@ const tableConfigs: TableConfig[] = [
       ["headquartersCountry", "主要国家/地区"],
       ["aliases", "别名"],
       ["description", "描述"],
+      ["website", "官网"],
+      ["wikipediaUrl", "Wikipedia"],
       ["updatedAt", "更新时间"],
     ],
   },
@@ -77,6 +82,14 @@ function renderCell(row: Record<string, unknown>, key: string) {
     return (
       <a className="text-accent-foreground hover:underline" href={row.sourceUrl} target="_blank" rel="noreferrer">
         {row.source}
+      </a>
+    );
+  }
+
+  if ((key === "website" || key === "officialSite" || key === "wikipediaUrl") && typeof row[key] === "string" && row[key]) {
+    return (
+      <a className="text-accent-foreground hover:underline" href={row[key]} target="_blank" rel="noreferrer">
+        {key === "wikipediaUrl" ? "打开" : row[key]}
       </a>
     );
   }
