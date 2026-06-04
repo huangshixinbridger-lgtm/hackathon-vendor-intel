@@ -35,7 +35,10 @@ const tableConfigs: TableConfig[] = [
     columns: [
       ["name", "游戏"],
       ["companyName", "公司"],
+      ["publisher", "发行商"],
+      ["developer", "开发商"],
       ["stage", "阶段"],
+      ["releaseDate", "Release"],
       ["genres", "品类"],
       ["platforms", "平台"],
       ["releaseRegions", "区域"],

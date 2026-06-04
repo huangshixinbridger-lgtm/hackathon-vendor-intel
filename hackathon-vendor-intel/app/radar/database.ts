@@ -33,6 +33,9 @@ export type GameProject = {
   ttNotes?: string;
   latestProgress: string;
   officialSite: string;
+  publisher?: string;
+  developer?: string;
+  releaseDate?: string;
   platforms: string[];
   relevanceScore: number;
   relevanceReasons?: string[];
