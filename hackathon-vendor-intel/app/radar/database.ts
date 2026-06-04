@@ -1,4 +1,5 @@
 import type { GameMove } from "@/types/contract";
+import radarData from "./radar-data.json";
 
 export type VendorCompany = {
   id: string;
@@ -8,6 +9,8 @@ export type VendorCompany = {
   headquartersCountry: string;
   description: string;
   website: string;
+  feishuRecordId?: string;
+  createdAt?: string;
   updatedAt: string;
 };
 
@@ -22,11 +25,16 @@ export type GameProject = {
   genres: string[];
   otherInfo: string;
   ttOperationStatus: string;
+  ttNotes?: string;
   latestProgress: string;
   officialSite: string;
   platforms: string[];
   relevanceScore: number;
+  relevanceReasons?: string[];
   discoverySource: string;
+  isBackfilled?: boolean;
+  feishuRecordId?: string;
+  createdAt?: string;
   updatedAt: string;
 };
 
@@ -40,8 +48,11 @@ export type GameUpdate = {
   sourceUrl: string;
   sourceName: string;
   sourcePublishedAt: string;
+  contentHash?: string;
   importance: number;
   updateType?: GameMove["moveType"];
+  feishuRecordId?: string;
+  createdAt?: string;
   updatedAt: string;
 };
 
@@ -69,184 +80,80 @@ export type RadarFilters = {
   table?: RadarTableName | null;
 };
 
-const companies: VendorCompany[] = [
-  {
-    id: "c-deepspace",
-    name: "深空互动",
-    aliases: ["Deep Space Interactive"],
-    region: "中国",
-    headquartersCountry: "中国",
-    description: "SLG 与科幻题材游戏厂商，近期在海外内容营销动作频繁。",
-    website: "https://example.com/deepspace",
-    updatedAt: "2026-05-28",
-  },
-  {
-    id: "c-aetherlight",
-    name: "幻光游戏",
-    aliases: ["Aetherlight Games"],
-    region: "全球",
-    headquartersCountry: "新加坡",
-    description: "RPG 新游发行商，公测期重点观察投放与达人内容表现。",
-    website: "https://example.com/aetherlight",
-    updatedAt: "2026-05-30",
-  },
-  {
-    id: "c-orbitjoy",
-    name: "环星娱乐",
-    aliases: ["Orbit Joy"],
-    region: "欧美",
-    headquartersCountry: "美国",
-    description: "休闲竞技与社交玩法厂商，适合跟踪活动节点与 UGC 爆发。",
-    website: "https://example.com/orbitjoy",
-    updatedAt: "2026-05-26",
-  },
-];
-
-const games: GameProject[] = [
-  {
-    id: "g-1001",
-    name: "星海远征 (Star Voyage)",
-    aliases: ["Star Voyage", "星海远征"],
-    companyId: "c-deepspace",
-    releaseRegions: ["北美", "东南亚"],
-    stage: "上线运营",
-    expectedLaunchDate: "2026-05-28",
-    genres: ["SLG"],
-    otherInfo: "2.0 资料片后适合观察赛季制内容与舰队玩法传播。",
-    ttOperationStatus: "已合作",
-    latestProgress: "上线 2.0 资料片『深空纪元』，新增舰队系统与赛季玩法。",
-    officialSite: "https://example.com/star-voyage",
-    platforms: ["iOS", "Android", "PC"],
-    relevanceScore: 92,
-    discoverySource: "厂商官方公告",
-    updatedAt: "2026-05-28",
-  },
-  {
-    id: "g-1002",
-    name: "幻塔纪元 (Aether Tower)",
-    aliases: ["Aether Tower", "幻塔纪元"],
-    companyId: "c-aetherlight",
-    releaseRegions: ["全球"],
-    stage: "公测",
-    expectedLaunchDate: "2026-05-30",
-    genres: ["RPG"],
-    otherInfo: "全球公测首周冲榜，海外买量与内容投放同步加码。",
-    ttOperationStatus: "待拓展",
-    latestProgress: "全球公测开启，首周冲榜，海外买量明显加码。",
-    officialSite: "https://example.com/aether-tower",
-    platforms: ["iOS", "Android"],
-    relevanceScore: 88,
-    discoverySource: "App Store 榜单 + 投放监测",
-    updatedAt: "2026-05-30",
-  },
-  {
-    id: "g-1003",
-    name: "极速派对 (Turbo Party)",
-    aliases: ["Turbo Party"],
-    companyId: "c-orbitjoy",
-    releaseRegions: ["北美", "欧洲"],
-    stage: "上线运营",
-    expectedLaunchDate: "2026-05-26",
-    genres: ["休闲竞技"],
-    otherInfo: "短视频挑战赛素材丰富，适合观察活动带来的 UGC 变化。",
-    ttOperationStatus: "观察中",
-    latestProgress: "开启夏季竞速挑战活动，新增多人限时赛和达人榜单。",
-    officialSite: "https://example.com/turbo-party",
-    platforms: ["iOS", "Android"],
-    relevanceScore: 78,
-    discoverySource: "TikTok 话题热度 + 官方社媒",
-    updatedAt: "2026-05-26",
-  },
-];
-
-const updates: GameUpdate[] = [
-  {
-    id: "u-2001",
-    summary: "上线 2.0 资料片『深空纪元』，新增舰队系统与赛季玩法。",
-    updateDate: "2026-05-28",
-    gameId: "g-1001",
-    companyId: "c-deepspace",
-    detail: "资料片带来新舰队养成、跨服赛季和限定剧情，预计带动硬核 SLG 达人内容产出。",
-    sourceUrl: "https://example.com/star-voyage/2-0",
-    sourceName: "厂商官方公告",
-    sourcePublishedAt: "2026-05-28",
-    importance: 5,
-    updateType: "大版本",
-    updatedAt: "2026-05-28",
-  },
-  {
-    id: "u-2002",
-    summary: "全球公测开启，首周冲榜，海外买量明显加码。",
-    updateDate: "2026-05-30",
-    gameId: "g-1002",
-    companyId: "c-aetherlight",
-    detail: "上线后进入多个地区下载榜前列，同时出现密集信息流素材与首发达人内容。",
-    sourceUrl: "https://example.com/aether-tower/launch",
-    sourceName: "App Store 榜单 + 投放监测",
-    sourcePublishedAt: "2026-05-30",
-    importance: 5,
-    updateType: "新游",
-    updatedAt: "2026-05-30",
-  },
-  {
-    id: "u-2003",
-    summary: "开启夏季竞速挑战活动，新增多人限时赛和达人榜单。",
-    updateDate: "2026-05-26",
-    gameId: "g-1003",
-    companyId: "c-orbitjoy",
-    detail: "活动机制天然适合短视频挑战，建议观察话题播放和达人报名趋势。",
-    sourceUrl: "https://example.com/turbo-party/summer-race",
-    sourceName: "TikTok 话题热度 + 官方社媒",
-    sourcePublishedAt: "2026-05-26",
-    importance: 3,
-    updateType: "活动",
-    updatedAt: "2026-05-26",
-  },
-];
-
-export const gameMoveMapping: Record<keyof GameMove, string> = {
-  gameId: "games.id",
-  name: "games.name",
-  category: "games.genres[0]",
-  moveType: "updates.updateType；缺省时根据 games.stage / updates.summary 推断",
-  summary: "updates.summary；缺省时使用 games.latestProgress",
-  source: "updates.sourceName；缺省时使用 games.discoverySource / companies.name",
-  date: "updates.updateDate；缺省时使用 games.expectedLaunchDate / games.updatedAt",
+type ImportedRadarData = {
+  companies: VendorCompany[];
+  games: GameProject[];
+  updates: Omit<GameUpdate, "updateType">[];
 };
 
-function findGame(gameId: string) {
-  return games.find((game) => game.id === gameId);
+const imported = radarData as ImportedRadarData;
+
+const companies = imported.companies;
+const games = imported.games;
+
+const gameById = new Map(games.map((game) => [game.id, game]));
+const companyById = new Map(companies.map((company) => [company.id, company]));
+
+export const gameMoveMapping: Record<keyof GameMove, string> = {
+  gameId: "games.id；厂商动态无 game_id 时使用 company-{companies.id}",
+  name: "games.name；厂商动态无 game_id 时使用 companies.name",
+  category: "games.genres[0]；厂商动态无 game_id 时为厂商动态",
+  moveType: "旧库无直接字段；根据 updates.summary/detail + games.stage/latest_progress 推断",
+  summary: "updates.summary；为空时使用 games.latest_progress",
+  source: "updates.source_name；为空时使用 games.discovery_source / companies.name",
+  date: "updates.update_date；为空时使用 games.expected_launch_date / games.updated_at",
+};
+
+function normalizeText(value: string) {
+  return value.toLowerCase();
 }
 
-function findCompany(companyId: string) {
-  return companies.find((company) => company.id === companyId);
-}
+function inferMoveType(game: GameProject, update?: Pick<GameUpdate, "summary" | "detail">): GameMove["moveType"] {
+  const text = normalizeText(`${game.stage} ${game.latestProgress} ${update?.summary ?? ""} ${update?.detail ?? ""}`);
 
-function inferMoveType(game: GameProject, update?: GameUpdate): GameMove["moveType"] {
-  if (update?.updateType) {
-    return update.updateType;
-  }
-
-  const text = `${game.stage} ${game.latestProgress} ${update?.summary ?? ""}`;
-  if (text.includes("公测") || text.includes("首发") || text.includes("上线")) {
-    return "新游";
-  }
-  if (text.includes("资料片") || text.includes("大版本") || text.includes("赛季")) {
-    return "大版本";
-  }
-  if (text.includes("活动") || text.includes("挑战")) {
+  if (/(活动|挑战|赛事|联动|campaign|event|collab|tournament)/i.test(text)) {
     return "活动";
   }
+
+  if (/(大版本|资料片|赛季|版本更新|更新|dlc|expansion|patch|season|update)/i.test(text)) {
+    return "大版本";
+  }
+
+  if (/(新游|公测|首发|预约|发售|上线|launch|released|release date|pre-register|beta)/i.test(text)) {
+    return "新游";
+  }
+
   return "版本更新";
 }
 
-function includesKeyword(values: Array<string | number | string[]>, query?: string | null) {
+const updates: GameUpdate[] = imported.updates.map((update) => {
+  const game = gameById.get(update.gameId);
+
+  return {
+    ...update,
+    updateType: game ? inferMoveType(game, update) : "版本更新",
+  };
+});
+
+function findGame(gameId: string) {
+  return gameById.get(gameId);
+}
+
+function findCompany(companyId: string) {
+  return companyById.get(companyId);
+}
+
+function includesKeyword(values: Array<string | number | boolean | string[] | undefined>, query?: string | null) {
   const keyword = query?.trim().toLowerCase();
   if (!keyword) {
     return true;
   }
 
   return values.some((value) => {
+    if (value === undefined) {
+      return false;
+    }
+
     const text = Array.isArray(value) ? value.join(" ") : String(value);
     return text.toLowerCase().includes(keyword);
   });
@@ -254,20 +161,28 @@ function includesKeyword(values: Array<string | number | string[]>, query?: stri
 
 export function mapUpdateToGameMove(update: GameUpdate): GameMove | null {
   const game = findGame(update.gameId);
-  if (!game) {
-    return null;
+  const company = findCompany(update.companyId || game?.companyId || "");
+
+  if (!game && !company) {
+    return {
+      gameId: `update-${update.id}`,
+      name: update.summary,
+      category: "未分类",
+      moveType: "版本更新",
+      summary: update.summary,
+      source: update.sourceName || "未知来源",
+      date: update.updateDate || update.updatedAt,
+    };
   }
 
-  const company = findCompany(update.companyId);
-
   return {
-    gameId: game.id,
-    name: game.name,
-    category: game.genres[0] ?? "未分类",
-    moveType: inferMoveType(game, update),
-    summary: update.summary || game.latestProgress,
-    source: update.sourceName || game.discoverySource || company?.name || "未知来源",
-    date: update.updateDate || game.expectedLaunchDate || game.updatedAt,
+    gameId: game?.id ?? `company-${company?.id}`,
+    name: game?.name ?? company?.name ?? update.summary,
+    category: game ? game.genres[0] ?? "未分类" : "厂商动态",
+    moveType: game ? update.updateType ?? inferMoveType(game, update) : update.updateType ?? "版本更新",
+    summary: update.summary || game?.latestProgress || company?.description || "",
+    source: update.sourceName || game?.discoverySource || company?.name || "未知来源",
+    date: update.updateDate || game?.expectedLaunchDate || game?.updatedAt || update.updatedAt,
   };
 }
 
@@ -301,13 +216,31 @@ export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatab
   );
   const filteredGames = games.filter((game) =>
     includesKeyword(
-      [game.name, game.aliases, game.stage, game.genres, game.releaseRegions, game.latestProgress, game.otherInfo],
+      [
+        game.name,
+        game.aliases,
+        game.stage,
+        game.genres,
+        game.releaseRegions,
+        game.latestProgress,
+        game.otherInfo,
+        game.ttOperationStatus,
+        game.discoverySource,
+      ],
       filters.q
     )
   );
   const filteredUpdates = updates.filter((update) =>
     includesKeyword(
-      [update.summary, update.detail, update.sourceName, update.updateType ?? "", update.gameId, update.companyId],
+      [
+        update.summary,
+        update.detail,
+        update.sourceName,
+        update.updateType,
+        update.gameId,
+        update.companyId,
+        update.sourceUrl,
+      ],
       filters.q
     )
   );
