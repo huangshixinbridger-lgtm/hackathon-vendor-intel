@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import type { RadarDatabaseSnapshot, RadarTableName } from "./database";
 
@@ -199,13 +198,13 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
         </div>
       </div>
 
-      <Card>
-        <CardHeader className="gap-3 sm:flex-row sm:items-start sm:justify-between">
+      <section className="space-y-3">
+        <div className="flex flex-col gap-3 border-b pb-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <CardTitle>{activeConfig.title}</CardTitle>
-            <CardDescription>
+            <h2 className="text-lg font-semibold leading-none tracking-tight">{activeConfig.title}</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
               {rows.length} 条记录，当前显示 {pageStart}-{pageEnd}，最后刷新 {lastUpdatedAt}
-            </CardDescription>
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">/radar/api/tables?table={activeTable}</Badge>
@@ -223,11 +222,11 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
               条
             </label>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto rounded-md border">
-            <table className="w-full min-w-[840px] text-left text-sm">
-              <thead className="bg-muted text-muted-foreground">
+        </div>
+        <div>
+          <div className="overflow-x-auto border">
+            <table className="w-full min-w-[840px] border-collapse text-left text-sm">
+              <thead className="border-b bg-muted text-muted-foreground">
                 <tr>
                   {activeConfig.columns.map(([, label]) => (
                     <th key={label} className="whitespace-nowrap px-3 py-2 font-medium">
@@ -238,7 +237,7 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
               </thead>
               <tbody>
                 {pageRows.map((row, index) => (
-                  <tr key={`${activeTable}-${String(row.id ?? row.name ?? index)}-${currentPage}`} className="border-t">
+                  <tr key={`${activeTable}-${String(row.id ?? row.name ?? index)}-${currentPage}`} className="border-b last:border-b-0">
                     {activeConfig.columns.map(([key]) => (
                       <td key={key} className="max-w-[320px] px-3 py-3 align-top">
                         {renderCell(row, key)}
@@ -293,8 +292,8 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
               </Button>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </div>
   );
 }
