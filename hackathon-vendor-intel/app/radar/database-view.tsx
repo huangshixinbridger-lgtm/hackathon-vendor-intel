@@ -113,11 +113,21 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
   const [snapshot, setSnapshot] = useState(initialSnapshot);
   const [activeTable, setActiveTable] = useState<RadarTableName>("updates");
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState("页面加载后刷新");
 
   const activeConfig = tableConfigs.find((table) => table.name === activeTable) ?? tableConfigs[0];
   const rows = useMemo(() => pickRows(snapshot, activeTable), [snapshot, activeTable]);
+  const totalPages = Math.max(1, Math.ceil(rows.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pageRows = useMemo(
+    () => rows.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+    [currentPage, pageSize, rows]
+  );
+  const pageStart = rows.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const pageEnd = Math.min(rows.length, currentPage * pageSize);
 
   const refresh = useCallback(async (nextQuery = query) => {
     setIsRefreshing(true);
@@ -147,6 +157,10 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
 
     return () => window.clearInterval(timer);
   }, [refresh]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [activeTable, pageSize, query, rows.length]);
 
   return (
     <div className="space-y-4">
@@ -190,10 +204,25 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
           <div>
             <CardTitle>{activeConfig.title}</CardTitle>
             <CardDescription>
-              {rows.length} 条记录，最后刷新 {lastUpdatedAt}
+              {rows.length} 条记录，当前显示 {pageStart}-{pageEnd}，最后刷新 {lastUpdatedAt}
             </CardDescription>
           </div>
-          <Badge variant="outline">/radar/api/tables?table={activeTable}</Badge>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline">/radar/api/tables?table={activeTable}</Badge>
+            <label className="flex items-center gap-2 text-sm text-muted-foreground">
+              每页
+              <select
+                value={pageSize}
+                onChange={(event) => setPageSize(Number(event.target.value))}
+                className="h-9 rounded-md border border-input bg-card px-2 text-sm"
+              >
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+              </select>
+              条
+            </label>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto rounded-md border">
@@ -208,8 +237,8 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row, index) => (
-                  <tr key={`${activeTable}-${index}`} className="border-t">
+                {pageRows.map((row, index) => (
+                  <tr key={`${activeTable}-${String(row.id ?? row.name ?? index)}-${currentPage}`} className="border-t">
                     {activeConfig.columns.map(([key]) => (
                       <td key={key} className="max-w-[320px] px-3 py-3 align-top">
                         {renderCell(row, key)}
@@ -226,6 +255,43 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
                 ) : null}
               </tbody>
             </table>
+          </div>
+          <div className="mt-4 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              第 {currentPage} / {totalPages} 页
+            </div>
+            <div className="flex items-center gap-2">
+              <Button type="button" variant="outline" size="sm" onClick={() => setPage(1)} disabled={currentPage <= 1}>
+                首页
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((value) => Math.max(1, value - 1))}
+                disabled={currentPage <= 1}
+              >
+                上一页
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
+                disabled={currentPage >= totalPages}
+              >
+                下一页
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setPage(totalPages)}
+                disabled={currentPage >= totalPages}
+              >
+                末页
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

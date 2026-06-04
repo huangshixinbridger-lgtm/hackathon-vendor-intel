@@ -580,7 +580,9 @@ export function ensureRadarScheduler() {
 
 export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatabaseSnapshot {
   const gameMoves = listGameMoves(filters);
-  const filteredUpdates = listIntelligenceItems(filters);
+  const filteredUpdates = listIntelligenceItems(filters).sort(
+    (a, b) => b.date.localeCompare(a.date) || b.importance - a.importance
+  );
   const relatedCompanyIds = new Set(filteredUpdates.map((update) => update.companyId).filter(Boolean));
   const relatedGameIds = new Set(filteredUpdates.map((update) => update.gameId).filter((gameId) => gameById.has(gameId)));
   const hasQuery = Boolean(filters.q?.trim());
