@@ -4,12 +4,27 @@
 import type { ContentRadarDetail } from "@/types/contract.contentRadar";
 import { mockContentRadar } from "@/lib/mock.contentRadar";
 import { freeFireRadar } from "@/lib/data.freefire";
+import { robloxRadar } from "@/lib/data.roblox";
+import { minecraftRadar } from "@/lib/data.minecraft";
+import { mlbbRadar } from "@/lib/data.mlbb";
 import RadarView from "./radar-view";
 
+// 真实数据的 4 个 hero 游戏（TikTok 全球 Top10 真实榜单）放前面，mock 走端到端动线兜底
 const REGISTRY: Record<string, ContentRadarDetail> = {
   freefire: freeFireRadar,
+  mlbb: mlbbRadar,
+  roblox: robloxRadar,
+  minecraft: minecraftRadar,
   ...mockContentRadar,
 };
+
+// 切换器展示的游戏（带真实数据的）
+const GAMES = [
+  { id: "freefire", name: "Free Fire" },
+  { id: "mlbb", name: "Mobile Legends" },
+  { id: "roblox", name: "Roblox" },
+  { id: "minecraft", name: "Minecraft" },
+];
 
 export default function ContentRadarPage({
   searchParams,
@@ -30,5 +45,5 @@ export default function ContentRadarPage({
     );
   }
 
-  return <RadarView data={data} />;
+  return <RadarView data={data} games={GAMES} current={gameId} />;
 }

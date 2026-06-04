@@ -90,14 +90,41 @@ function BubbleCloud({ types }: { types: ContentTypeBubble[] }) {
   );
 }
 
-export default function RadarView({ data }: { data: ContentRadarDetail }) {
+export default function RadarView({
+  data,
+  games = [],
+  current,
+}: {
+  data: ContentRadarDetail;
+  games?: { id: string; name: string }[];
+  current?: string;
+}) {
   const [playing, setPlaying] = useState<string | null>(null);
   const totalVV = data.topVideos.reduce((s, v) => s + v.vv, 0);
 
   return (
     <div className="mx-auto max-w-5xl px-2 pb-32">
+      {/* 游戏切换器 */}
+      {games.length > 0 && (
+        <div className="flex flex-wrap gap-2 pt-8">
+          {games.map((g) => (
+            <Link
+              key={g.id}
+              href={`/content-radar?gameId=${g.id}`}
+              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                g.id === current
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-foreground/15 text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              {g.name}
+            </Link>
+          ))}
+        </div>
+      )}
+
       {/* Hero */}
-      <motion.header initial="hidden" animate="show" variants={fadeUp} className="pt-10 pb-16">
+      <motion.header initial="hidden" animate="show" variants={fadeUp} className="pt-8 pb-16">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">内容雷达 · TikTok 内容生态</p>
         <h1 className="mt-4 text-6xl font-bold tracking-tight sm:text-7xl">{data.gameName}</h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
