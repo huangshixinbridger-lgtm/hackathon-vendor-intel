@@ -580,49 +580,54 @@ export function ensureRadarScheduler() {
 
 export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatabaseSnapshot {
   const gameMoves = listGameMoves(filters);
-  const filteredCompanies = companies.filter((company) =>
-    includesKeyword(
-      [company.name, company.aliases, company.region, company.headquartersCountry, company.description],
+  const filteredUpdates = listIntelligenceItems(filters);
+  const relatedCompanyIds = new Set(filteredUpdates.map((update) => update.companyId).filter(Boolean));
+  const relatedGameIds = new Set(filteredUpdates.map((update) => update.gameId).filter((gameId) => gameById.has(gameId)));
+  const hasQuery = Boolean(filters.q?.trim());
+  const filteredCompanies = companies.filter((company) => {
+    const matchedKeyword = includesKeyword(
+      [
+        company.name,
+        company.aliases,
+        company.region,
+        company.headquartersCountry,
+        company.description,
+        company.updatedAt,
+        company.createdAt,
+      ],
       filters.q
-    )
-  );
+    );
+
+    return matchedKeyword || (hasQuery && relatedCompanyIds.has(company.id));
+  });
   const filteredGames = games
     .map((game) => ({
       ...game,
       companyName: findCompany(game.companyId)?.name ?? "",
     }))
-    .filter((game) =>
-      includesKeyword(
+    .filter((game) => {
+      const matchedKeyword = includesKeyword(
         [
           game.name,
           game.companyName,
           game.aliases,
           game.stage,
+          game.expectedLaunchDate,
+          game.releaseDate,
           game.genres,
           game.releaseRegions,
           game.latestProgress,
           game.otherInfo,
           game.ttOperationStatus,
           game.discoverySource,
+          game.createdAt,
+          game.updatedAt,
         ],
         filters.q
-      )
-    );
-  const filteredUpdates = listIntelligenceItems(filters).filter((update) =>
-    includesKeyword(
-      [
-        update.name,
-        update.summary,
-        update.detail,
-        update.source,
-        update.moveType,
-        update.companyName,
-        update.category,
-        update.sourceUrl,
-      ],
-      filters.q
-    )
-  );
+      );
+
+      return matchedKeyword || (hasQuery && relatedGameIds.has(game.id));
+    });
 
   return {
     companies: filteredCompanies,
