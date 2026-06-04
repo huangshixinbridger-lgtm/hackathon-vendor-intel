@@ -2,9 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { RefreshCw } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import type { RadarDatabaseSnapshot, RadarTableName } from "./database";
 
 type TableConfig = {
@@ -162,58 +159,67 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
   }, [activeTable, pageSize, query, rows.length]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap gap-2">
-          {tableConfigs.map((table) => (
-            <button
-              key={table.name}
-              type="button"
-              onClick={() => setActiveTable(table.name)}
-              className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
-                activeTable === table.name ? "bg-primary text-primary-foreground" : "bg-card hover:bg-accent"
-              }`}
-            >
-              {table.title}
-            </button>
-          ))}
-        </div>
+    <section className="space-y-3">
+      <div className="border-b">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-wrap gap-5">
+            {tableConfigs.map((table) => (
+              <button
+                key={table.name}
+                type="button"
+                onClick={() => setActiveTable(table.name)}
+                className={`border-b-2 px-0 pb-2 text-sm transition-colors ${
+                  activeTable === table.name
+                    ? "border-primary font-medium text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {table.title}
+              </button>
+            ))}
+          </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <Input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                void refresh();
-              }
-            }}
-            placeholder="实时搜索表内容"
-            className="sm:w-64"
-          />
-          <Button type="button" variant="outline" onClick={() => refresh()} disabled={isRefreshing}>
-            <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
-            刷新
-          </Button>
+          <div className="flex flex-col gap-2 pb-2 sm:flex-row sm:items-center">
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  void refresh();
+                }
+              }}
+              placeholder="实时搜索表内容"
+              className="h-10 border border-input bg-background px-3 text-sm outline-none focus:border-primary sm:w-64"
+            />
+            <button
+              type="button"
+              onClick={() => refresh()}
+              disabled={isRefreshing}
+              className="inline-flex h-10 items-center justify-center gap-2 border px-3 text-sm transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
+              刷新
+            </button>
+          </div>
         </div>
       </div>
 
-      <section className="space-y-3">
-        <div className="flex flex-col gap-3 border-b pb-3 sm:flex-row sm:items-start sm:justify-between">
+      <div className="space-y-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h2 className="text-lg font-semibold leading-none tracking-tight">{activeConfig.title}</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               {rows.length} 条记录，当前显示 {pageStart}-{pageEnd}，最后刷新 {lastUpdatedAt}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline">/radar/api/tables?table={activeTable}</Badge>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-xs text-muted-foreground">/radar/api/tables?table={activeTable}</span>
             <label className="flex items-center gap-2 text-sm text-muted-foreground">
               每页
               <select
                 value={pageSize}
                 onChange={(event) => setPageSize(Number(event.target.value))}
-                className="h-9 rounded-md border border-input bg-card px-2 text-sm"
+                className="h-8 border border-input bg-background px-2 text-sm"
               >
                 <option value={10}>10</option>
                 <option value={20}>20</option>
@@ -224,9 +230,9 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
           </div>
         </div>
         <div>
-          <div className="overflow-x-auto border">
+          <div className="overflow-x-auto border-y">
             <table className="w-full min-w-[840px] border-collapse text-left text-sm">
-              <thead className="border-b bg-muted text-muted-foreground">
+              <thead className="border-b text-muted-foreground">
                 <tr>
                   {activeConfig.columns.map(([, label]) => (
                     <th key={label} className="whitespace-nowrap px-3 py-2 font-medium">
@@ -255,45 +261,42 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
               </tbody>
             </table>
           </div>
-          <div className="mt-4 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-3 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <div>
               第 {currentPage} / {totalPages} 页
             </div>
             <div className="flex items-center gap-2">
-              <Button type="button" variant="outline" size="sm" onClick={() => setPage(1)} disabled={currentPage <= 1}>
+              <button type="button" className="border px-2.5 py-1 disabled:opacity-40" onClick={() => setPage(1)} disabled={currentPage <= 1}>
                 首页
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                variant="outline"
-                size="sm"
+                className="border px-2.5 py-1 disabled:opacity-40"
                 onClick={() => setPage((value) => Math.max(1, value - 1))}
                 disabled={currentPage <= 1}
               >
                 上一页
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                variant="outline"
-                size="sm"
+                className="border px-2.5 py-1 disabled:opacity-40"
                 onClick={() => setPage((value) => Math.min(totalPages, value + 1))}
                 disabled={currentPage >= totalPages}
               >
                 下一页
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                variant="outline"
-                size="sm"
+                className="border px-2.5 py-1 disabled:opacity-40"
                 onClick={() => setPage(totalPages)}
                 disabled={currentPage >= totalPages}
               >
                 末页
-              </Button>
+              </button>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
