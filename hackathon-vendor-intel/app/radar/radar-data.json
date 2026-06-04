@@ -1,6 +1,6 @@
 {
   "importedFrom": "/Users/bytedance/Documents/GameMoveTest/data/game_tracker.sqlite3",
-  "importedAt": "2026-06-04T10:45:30.040Z",
+  "importedAt": "2026-06-04T13:27:24.064Z",
   "companies": [
     {
       "id": "1",
@@ -963,7 +963,7 @@
       "releaseRegions": [
         "全球"
       ],
-      "stage": "研发中",
+      "stage": "正式上线",
       "expectedLaunchDate": "",
       "genres": [
         "开放世界",
@@ -974,7 +974,11 @@
       "ttNotes": "",
       "latestProgress": "2026-05-22｜Layoffs imminent at Bungie, former BioWare devs launch new studio, and GTA VI still on for November - Patch Notes #53",
       "officialSite": "",
-      "platforms": [],
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
       "relevanceScore": 60,
       "relevanceReasons": [
         "配置 watchlist 收录"
@@ -983,7 +987,14 @@
       "isBackfilled": false,
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00"
+      "updatedAt": "2026-06-04T13:27:24.062Z",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+      "wikipediaTitle": "Grand Theft Auto VI",
+      "wikipediaDescription": "Upcoming video game",
+      "publisher": "Rockstar Games",
+      "developer": "Rockstar Games",
+      "releaseDate": "2026-05-26",
+      "wikipediaLastCheckedAt": "2026-06-04T13:27:24.062Z"
     },
     {
       "id": "2",

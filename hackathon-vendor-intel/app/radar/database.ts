@@ -2,6 +2,13 @@ import type { GameMove } from "@/types/contract";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import radarData from "./radar-data.json";
+import {
+  applyWikipediaInfoToGame,
+  readWikipediaGameInfo,
+  shouldUpdateWikipediaGame,
+  type WikipediaBackfillMode,
+  type WikipediaBackfillResult,
+} from "./wikipedia";
 
 export type VendorCompany = {
   id: string;
@@ -45,6 +52,7 @@ export type GameProject = {
   wikipediaUrl?: string;
   wikipediaTitle?: string;
   wikipediaDescription?: string;
+  wikipediaLastCheckedAt?: string;
   createdAt?: string;
   updatedAt: string;
 };
@@ -546,6 +554,44 @@ export async function runRadarRefresh(): Promise<RefreshResult> {
   };
 }
 
+export async function runWikipediaGameBackfill(
+  mode: WikipediaBackfillMode = "incremental",
+  limit?: number
+): Promise<WikipediaBackfillResult> {
+  const candidates = games.filter((game) => shouldUpdateWikipediaGame(game, mode));
+  const selectedGames = Number.isFinite(limit) && limit && limit > 0 ? candidates.slice(0, limit) : candidates;
+  const result: WikipediaBackfillResult = {
+    mode,
+    checked: 0,
+    updated: 0,
+    skipped: games.length - selectedGames.length,
+    failed: 0,
+    failures: [],
+  };
+
+  for (const game of selectedGames) {
+    result.checked += 1;
+    try {
+      const info = await readWikipediaGameInfo(game);
+      if (applyWikipediaInfoToGame(game, info)) {
+        result.updated += 1;
+      }
+    } catch (error) {
+      result.failed += 1;
+      result.failures.push({
+        game: game.name,
+        reason: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
+  }
+
+  if (result.updated > 0 || result.checked > 0) {
+    saveImportedData();
+  }
+
+  return result;
+}
+
 export function ensureRadarScheduler() {
   const globalState = globalThis as typeof globalThis & {
     __radarSchedulerStarted?: boolean;
@@ -574,6 +620,11 @@ export function ensureRadarScheduler() {
     if (get("hour") === "00" && get("minute") === "00" && globalState.__radarSchedulerLastRun !== runKey) {
       globalState.__radarSchedulerLastRun = runKey;
       void runRadarRefresh();
+    }
+
+    if (get("hour") === "01" && get("minute") === "00" && globalState.__radarSchedulerLastRun !== `wiki-${runKey}`) {
+      globalState.__radarSchedulerLastRun = `wiki-${runKey}`;
+      void runWikipediaGameBackfill("incremental", 25);
     }
   }, 60 * 1000);
 }
