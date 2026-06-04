@@ -1,6 +1,6 @@
 {
   "importedFrom": "/Users/bytedance/Documents/GameMoveTest/data/game_tracker.sqlite3",
-  "importedAt": "2026-06-04T10:01:53.964Z",
+  "importedAt": "2026-06-04T10:45:30.040Z",
   "companies": [
     {
       "id": "1",
@@ -870,14 +870,22 @@
     {
       "id": "187",
       "name": "网易",
-      "aliases": [],
+      "aliases": [
+        "NetEase Games",
+        "NetEase",
+        "网易游戏",
+        "网易"
+      ],
       "region": "全球",
       "headquartersCountry": "全球",
       "description": "厂商名称: 网易；厂商归属区域: GBS-CNOB-华南；是否建联: 已建联；分级 (Tier): T0（年框）；所属区域: 全球；游戏项目库 (Games): 无限大,归唐,破碎之地 Ashfall,永劫无间 Mobile,燕云十六声 Where Winds Meet,漫威争锋 Marvel Rivals,Identity V 第五人格,Knives Out（荒野行动）,Blood Strike,Frag Punk,遗忘之海 Sea of Remnants；添加人: 许傲东 Jeff；最近修改时间: 2026-03-04 16:48:50",
       "website": "",
       "feishuRecordId": "",
       "createdAt": "2026-06-01T04:23:08+00:00",
-      "updatedAt": "2026-06-01T04:23:08+00:00"
+      "updatedAt": "2026-06-04T10:45:30.040Z",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/NetEase",
+      "wikipediaTitle": "NetEase",
+      "wikipediaDescription": "Chinese Internet technology company"
     },
     {
       "id": "188",
@@ -8440,23 +8448,37 @@
     {
       "id": "415",
       "name": "Blood Strike",
-      "aliases": [],
+      "aliases": [
+        "Blood Strike",
+        "Project: BloodStrike"
+      ],
       "companyId": "187",
       "releaseRegions": [
         "全球"
       ],
-      "stage": "长线运营",
-      "expectedLaunchDate": "",
+      "stage": "正式上线",
+      "expectedLaunchDate": "2023-10-28",
       "genres": [
         "Shooter (FPS",
-        "TPS)-射击"
+        "TPS)-射击",
+        "first-person shooter",
+        "battle royale",
+        "free-to-play",
+        "massively multiplayer",
+        "adventure",
+        "strategy"
       ],
-      "otherInfo": "低配版战区 (Warzone)",
+      "otherInfo": "低配版战区 (Warzone)\nWikipedia/Steam/Google Play：First release 2023-10-28 in Southeast Asia; global launch 2024-03-21; Steam release 2025-03-13. Developer/Publisher: NetEase Games. Regional publisher includes Funtap Games Joint Stock Company for Vietnam.",
       "ttOperationStatus": "未知",
       "ttNotes": "",
-      "latestProgress": "2026-06-01｜飞书多维表格导入",
-      "officialSite": "",
-      "platforms": [],
+      "latestProgress": "2026-06-04｜公开来源补全：First release 2023-10-28；Developer: NetEase Games；Publisher: NetEase Games；Platforms: Android, Microsoft Windows, iOS, GeForce Now",
+      "officialSite": "https://www.blood-strike.com/",
+      "platforms": [
+        "Android",
+        "Microsoft Windows",
+        "iOS",
+        "GeForce Now"
+      ],
       "relevanceScore": 100,
       "relevanceReasons": [
         "飞书多维表格导入"
@@ -8465,7 +8487,13 @@
       "isBackfilled": true,
       "feishuRecordId": "",
       "createdAt": "2026-06-01T04:23:08+00:00",
-      "updatedAt": "2026-06-01T04:23:08+00:00"
+      "updatedAt": "2026-06-04T10:45:30.040Z",
+      "releaseDate": "2023-10-28",
+      "publisher": "NetEase Games",
+      "developer": "NetEase Games",
+      "wikipediaUrl": "https://es.wikipedia.org/wiki/Blood_Strike",
+      "wikipediaTitle": "Blood Strike",
+      "wikipediaDescription": "Videojuego de disparos en primera persona de battle royale desarrollado y publicado por NetEase Games"
     },
     {
       "id": "416",
