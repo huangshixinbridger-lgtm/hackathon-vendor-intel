@@ -2,6 +2,7 @@
 // app/content-radar/radar-view.tsx —— 内容雷达 · 编辑杂志风视图（Jeff）
 // 极简留白 + 超大标题 + Apple Music 式漂浮气泡 + 大图编辑排版 + framer-motion 动效。
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ContentRadarDetail, ContentTypeBubble } from "@/types/contract.contentRadar";
 
@@ -103,6 +104,12 @@ export default function RadarView({ data }: { data: ContentRadarDetail }) {
           这款游戏在 TikTok 上靠什么内容活着 —— {fmt(totalVV)} 播放背后的内容语言，
           以及每条爆款<span className="text-foreground">为什么火</span>。
         </p>
+        <Link
+          href={`/diagnosis?gameId=${data.gameId}`}
+          className="mt-7 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+        >
+          生成诊断报告 →
+        </Link>
       </motion.header>
 
       {/* 内容类型 · Apple Music 式漂浮气泡 */}

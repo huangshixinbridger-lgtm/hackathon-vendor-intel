@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Radar, Stethoscope, BarChart3, ArrowRight } from "lucide-react";
+import { Radar, Stethoscope, BarChart3, ArrowRight, Sparkles } from "lucide-react";
 import { SearchBox } from "@/components/shell/search-box";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const MODULES = [
   { href: "/radar", icon: Radar, title: "① 情报雷达", desc: "最近谁有动作：新游、版本更新、大动作。先解决「我该关注谁」。", owner: "Gardner" },
-  { href: "/diagnosis", icon: Stethoscope, title: "② 诊断报告", desc: "选中一个游戏，一键出它在平台的生态、竞品对比、推荐营销动作。", owner: "Rena" },
-  { href: "/gip", icon: BarChart3, title: "③ GIP 面板", desc: "分时段/游戏/品类/厂商看预算与消耗，可下钻到活动明细。", owner: "白思宇" },
+  { href: "/content-radar", icon: Sparkles, title: "② 内容雷达", desc: "这游戏在 TikTok 靠什么内容活着：top 内容为什么火 + 内容类型分布。", owner: "Jeff" },
+  { href: "/diagnosis", icon: Stethoscope, title: "③ 诊断报告", desc: "选中一个游戏，一键出它在平台的生态、竞品对比、推荐营销动作。", owner: "Rena" },
+  { href: "/gip", icon: BarChart3, title: "④ GIP 面板", desc: "分时段/游戏/品类/厂商看预算与消耗，可下钻到活动明细。", owner: "白思宇" },
 ];
 
 export default function HomePage() {
@@ -25,7 +26,7 @@ export default function HomePage() {
         <SearchBox />
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {MODULES.map(({ href, icon: Icon, title, desc, owner }) => (
           <Link key={href} href={href} className="group">
             <Card className="h-full transition-shadow hover:shadow-md">
