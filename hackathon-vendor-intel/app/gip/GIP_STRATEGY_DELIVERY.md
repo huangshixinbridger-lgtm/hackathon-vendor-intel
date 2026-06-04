@@ -66,4 +66,5 @@ GIP 模块不是上游大盘诊断的重复页面，而是为诊断报告补充 
 - 点击游戏后能看到历史活动复盘。
 - 新游戏能基于同品类 benchmark 输出建议。
 - `/gip?gameId=yanyun` 能自动选中燕云十六声。
+- `/gip?gameId=freefire`、搜索 `Free Fire` 或 `free-fire` 能自动切换到 Free Fire。
 - 当前 PR 仅修改 `app/gip/`。

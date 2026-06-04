@@ -24,6 +24,18 @@ function uniq(values: string[]) {
   return [allOption, ...Array.from(new Set(values)).sort()];
 }
 
+function normalizeKeyword(value: string | null | undefined) {
+  return (value ?? "").toLowerCase().replace(/[\s_-]+/g, "");
+}
+
+function matchesGame(record: GIPStrategyRecord, value: string | null | undefined) {
+  const keyword = normalizeKeyword(value);
+  if (!keyword) return false;
+  return [record.gameId, record.game, record.vendor, record.category, ...(record.aliases ?? [])].some((text) =>
+    normalizeKeyword(text).includes(keyword)
+  );
+}
+
 function SelectBox({
   label,
   value,
@@ -173,7 +185,7 @@ export default function GipPage() {
 function GipContent() {
   const searchParams = useSearchParams();
   const gameIdFromUrl = searchParams.get("gameId");
-  const initialRecord = mockGIPRecords.find((record) => record.gameId === gameIdFromUrl) ?? mockGIPRecords[0];
+  const initialRecord = mockGIPRecords.find((record) => matchesGame(record, gameIdFromUrl)) ?? mockGIPRecords[0];
   const [query, setQuery] = useState("");
   const [period, setPeriod] = useState(allOption);
   const [region, setRegion] = useState(allOption);
@@ -183,11 +195,13 @@ function GipContent() {
   const [reportGenerated, setReportGenerated] = useState(true);
 
   const filteredRecords = useMemo(() => {
-    const keyword = query.trim().toLowerCase();
+    const keyword = normalizeKeyword(query);
     return mockGIPRecords.filter((record) => {
       const hitKeyword =
         !keyword ||
-        [record.game, record.vendor, record.category, record.gameId].some((text) => text.toLowerCase().includes(keyword));
+        [record.game, record.vendor, record.category, record.gameId, ...(record.aliases ?? [])].some((text) =>
+          normalizeKeyword(text).includes(keyword)
+        );
       return (
         hitKeyword &&
         (period === allOption || record.period === period) &&
@@ -198,8 +212,11 @@ function GipContent() {
     });
   }, [category, period, query, region, shape]);
 
+  const selectedCandidate = mockGIPRecords.find((record) => record.gameId === selectedGameId);
   const selectedRecord =
-    mockGIPRecords.find((record) => record.gameId === selectedGameId) ?? filteredRecords[0] ?? mockGIPRecords[0];
+    selectedCandidate && filteredRecords.some((record) => record.gameId === selectedCandidate.gameId)
+      ? selectedCandidate
+      : filteredRecords[0] ?? selectedCandidate ?? mockGIPRecords[0];
   const visibleActivities = getActivities(filteredRecords);
   const selectedActivities = selectedRecord.activities;
   const peers = getBenchmarks(selectedRecord);
