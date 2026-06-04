@@ -70,6 +70,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
   const selectedGameId = searchParams?.gameId?.trim();
   const filters = { q: query, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
   const intelligenceItems = listIntelligenceItems(filters);
+  const currentWindowItems = listIntelligenceItems({ dateWindow: selectedWindow });
   const snapshot = getRadarDatabaseSnapshot();
   const todaySummary = getTodaySummaryStats();
   const highImportanceCount = intelligenceItems.filter((item) => item.importance >= 4).length;
@@ -223,7 +224,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           <CardContent className="space-y-3">
             <div className="text-2xl font-bold">{snapshot.stats.updateCount}</div>
             <p className="text-xs text-muted-foreground">
-              updates · 当前周期 {dateWindows.find((item) => item.value === selectedWindow)?.label}：{intelligenceItems.length} 条
+              updates · 当前周期 {dateWindows.find((item) => item.value === selectedWindow)?.label}：{currentWindowItems.length} 条
             </p>
             <div className="flex flex-wrap gap-2">
               {dateWindows.map((item) => (
