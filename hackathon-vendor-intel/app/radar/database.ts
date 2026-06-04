@@ -57,6 +57,17 @@ export type GameUpdate = {
 };
 
 export type RadarTableName = "companies" | "games" | "updates" | "gameMoves";
+export type DateWindow = "24h" | "7d" | "30d" | "all";
+export type IntelligenceItem = GameMove & {
+  id: string;
+  companyId: string;
+  companyName: string;
+  region: string;
+  importance: number;
+  operationMeaning: string;
+  detail: string;
+  sourceUrl: string;
+};
 
 export type RadarDatabaseSnapshot = {
   companies: VendorCompany[];
@@ -77,6 +88,8 @@ export type RadarFilters = {
   q?: string | null;
   type?: GameMove["moveType"] | null;
   gameId?: string | null;
+  dateWindow?: DateWindow | null;
+  minImportance?: number | null;
   table?: RadarTableName | null;
 };
 
@@ -126,11 +139,82 @@ function inferMoveType(game: GameProject, update?: Pick<GameUpdate, "summary" | 
   return "版本更新";
 }
 
+function inferImportance(update: Omit<GameUpdate, "updateType">, game?: GameProject) {
+  const text = normalizeText(`${update.summary} ${update.detail} ${game?.stage ?? ""} ${game?.latestProgress ?? ""}`);
+  let score = Math.max(1, Math.min(5, update.importance || 1));
+
+  if (/(launch|launched|上线|公测|release date|pre-register|预约|beta|soft launch)/i.test(text)) {
+    score += 1;
+  }
+
+  if (/(大版本|资料片|dlc|expansion|season|赛季|major update)/i.test(text)) {
+    score += 1;
+  }
+
+  if (/(revenue|net bookings|downloads|sales|收入|流水|下载|销量|profit|net income)/i.test(text)) {
+    score += 1;
+  }
+
+  if (/(acquisition|funding|layoff|cancels|shut down|end of service|收购|融资|裁员|取消|停服)/i.test(text)) {
+    score += 1;
+  }
+
+  if (game && game.relevanceScore >= 80) {
+    score += 1;
+  }
+
+  return Math.min(5, score);
+}
+
+function getLatestUpdateDate() {
+  return updates.map((update) => update.updateDate).sort().at(-1) ?? "";
+}
+
+function isWithinDateWindow(date: string, dateWindow?: DateWindow | null) {
+  if (!dateWindow || dateWindow === "all") {
+    return true;
+  }
+
+  const latest = getLatestUpdateDate();
+  const latestTime = Date.parse(latest);
+  const currentTime = Date.parse(date);
+  if (Number.isNaN(latestTime) || Number.isNaN(currentTime)) {
+    return true;
+  }
+
+  const days = dateWindow === "24h" ? 1 : dateWindow === "7d" ? 7 : 30;
+  return latestTime - currentTime <= days * 24 * 60 * 60 * 1000;
+}
+
+function getOperationMeaning(move: GameMove, update: GameUpdate, company?: VendorCompany) {
+  const owner = company?.name ? `${company.name} 的` : "";
+  const sourceHint = update.sourceName ? `来源 ${update.sourceName}` : "来源已记录";
+
+  if (move.moveType === "新游") {
+    return `${owner}${move.name}进入上线/测试窗口，适合优先确认发行节奏、目标地区和 GIP 首轮达人预算。${sourceHint}。`;
+  }
+
+  if (move.moveType === "大版本") {
+    return `${owner}${move.name}出现大版本或资料片节点，适合围绕新内容做诊断，并评估是否承接版本营销预算。${sourceHint}。`;
+  }
+
+  if (move.moveType === "活动") {
+    return `${owner}${move.name}出现赛事、联动或活动信号，适合快速判断活动周期内是否能组织短视频/直播达人放量。${sourceHint}。`;
+  }
+
+  if (move.category === "厂商动态") {
+    return `${move.name}出现厂商级经营动态，适合运营关注该厂商近期预算、组织或发行策略变化，判断是否需要跟进拜访。${sourceHint}。`;
+  }
+
+  return `${owner}${move.name}有持续动态更新，适合纳入日常巡逻，结合诊断与 GIP 消耗判断是否存在跟进机会。${sourceHint}。`;
+}
+
 const updates: GameUpdate[] = imported.updates.map((update) => {
   const game = gameById.get(update.gameId);
 
   return {
     ...update,
+    importance: inferImportance(update, game),
     updateType: game ? inferMoveType(game, update) : "版本更新",
   };
 });
@@ -186,24 +270,64 @@ export function mapUpdateToGameMove(update: GameUpdate): GameMove | null {
   };
 }
 
-export function listGameMoves(filters: RadarFilters = {}): GameMove[] {
+export function mapUpdateToIntelligenceItem(update: GameUpdate): IntelligenceItem | null {
+  const move = mapUpdateToGameMove(update);
+  if (!move) {
+    return null;
+  }
+
+  const game = findGame(update.gameId);
+  const company = findCompany(update.companyId || game?.companyId || "");
+
+  return {
+    ...move,
+    id: update.id,
+    companyId: company?.id ?? "",
+    companyName: company?.name ?? "",
+    region: company?.region || game?.releaseRegions[0] || "未知地区",
+    importance: update.importance,
+    operationMeaning: getOperationMeaning(move, update, company),
+    detail: update.detail,
+    sourceUrl: update.sourceUrl,
+  };
+}
+
+export function listIntelligenceItems(filters: RadarFilters = {}): IntelligenceItem[] {
   const query = filters.q?.trim().toLowerCase();
 
   return updates
-    .map(mapUpdateToGameMove)
-    .filter((move): move is GameMove => Boolean(move))
-    .filter((move) => {
-      const matchedGame = !filters.gameId || move.gameId === filters.gameId;
-      const matchedType = !filters.type || move.moveType === filters.type;
+    .map(mapUpdateToIntelligenceItem)
+    .filter((item): item is IntelligenceItem => Boolean(item))
+    .filter((item) => {
+      const matchedGame = !filters.gameId || item.gameId === filters.gameId;
+      const matchedType = !filters.type || item.moveType === filters.type;
+      const matchedImportance = !filters.minImportance || item.importance >= filters.minImportance;
+      const matchedDate = isWithinDateWindow(item.date, filters.dateWindow);
       const matchedQuery =
         !query ||
-        [move.name, move.category, move.moveType, move.summary, move.source].some((field) =>
-          field.toLowerCase().includes(query)
-        );
+        [
+          item.name,
+          item.category,
+          item.moveType,
+          item.summary,
+          item.source,
+          item.companyName,
+          item.region,
+          item.operationMeaning,
+        ].some((field) => field.toLowerCase().includes(query));
 
-      return matchedGame && matchedType && matchedQuery;
+      return matchedGame && matchedType && matchedImportance && matchedDate && matchedQuery;
     })
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.importance - a.importance || b.date.localeCompare(a.date));
+}
+
+export function listGameMoves(filters: RadarFilters = {}): GameMove[] {
+  return listIntelligenceItems(filters).map(({ id, companyId, companyName, region, importance, operationMeaning, detail, sourceUrl, ...move }) => move);
+}
+
+export function getTodayHighlights() {
+  const recentItems = listIntelligenceItems({ dateWindow: "7d" });
+  return recentItems.slice(0, 3);
 }
 
 export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatabaseSnapshot {
@@ -255,7 +379,7 @@ export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatab
       gameCount: games.length,
       updateCount: updates.length,
       gameMoveCount: gameMoves.length,
-      latestUpdateDate: updates.map((update) => update.updateDate).sort().at(-1) ?? "",
+      latestUpdateDate: getLatestUpdateDate(),
     },
     mapping: gameMoveMapping,
   };
