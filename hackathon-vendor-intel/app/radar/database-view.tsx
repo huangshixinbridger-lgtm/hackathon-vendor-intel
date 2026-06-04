@@ -84,12 +84,21 @@ function pickRows(snapshot: RadarDatabaseSnapshot, table: RadarTableName) {
   return snapshot[table] as Array<Record<string, unknown>>;
 }
 
+function formatRefreshTime() {
+  return new Intl.DateTimeFormat("zh-CN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(new Date());
+}
+
 export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarDatabaseSnapshot }) {
   const [snapshot, setSnapshot] = useState(initialSnapshot);
   const [activeTable, setActiveTable] = useState<RadarTableName>("gameMoves");
   const [query, setQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [lastUpdatedAt, setLastUpdatedAt] = useState(() => new Date().toLocaleTimeString());
+  const [lastUpdatedAt, setLastUpdatedAt] = useState("页面加载后刷新");
 
   const activeConfig = tableConfigs.find((table) => table.name === activeTable) ?? tableConfigs[0];
   const rows = useMemo(() => pickRows(snapshot, activeTable), [snapshot, activeTable]);
@@ -107,13 +116,15 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
       });
       const data = (await response.json()) as RadarDatabaseSnapshot;
       setSnapshot(data);
-      setLastUpdatedAt(new Date().toLocaleTimeString());
+      setLastUpdatedAt(formatRefreshTime());
     } finally {
       setIsRefreshing(false);
     }
   }, [query]);
 
   useEffect(() => {
+    setLastUpdatedAt(formatRefreshTime());
+
     const timer = window.setInterval(() => {
       void refresh();
     }, 15000);
