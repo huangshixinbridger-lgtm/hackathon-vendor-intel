@@ -70,7 +70,7 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
   const selectedGameId = searchParams?.gameId?.trim();
   const filters = { q: query, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
   const intelligenceItems = listIntelligenceItems(filters);
-  const snapshot = getRadarDatabaseSnapshot(filters);
+  const snapshot = getRadarDatabaseSnapshot();
   const todaySummary = getTodaySummaryStats();
   const highImportanceCount = intelligenceItems.filter((item) => item.importance >= 4).length;
 
