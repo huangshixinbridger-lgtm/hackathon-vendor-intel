@@ -38,6 +38,10 @@ export type GameProject = {
   updatedAt: string;
 };
 
+export type GameProjectRow = GameProject & {
+  companyName: string;
+};
+
 export type GameUpdate = {
   id: string;
   summary: string;
@@ -56,7 +60,7 @@ export type GameUpdate = {
   updatedAt: string;
 };
 
-export type RadarTableName = "companies" | "games" | "updates" | "gameMoves";
+export type RadarTableName = "companies" | "games" | "updates";
 export type DateWindow = "24h" | "7d" | "30d" | "all";
 export type IntelligenceItem = GameMove & {
   id: string;
@@ -71,8 +75,8 @@ export type IntelligenceItem = GameMove & {
 
 export type RadarDatabaseSnapshot = {
   companies: VendorCompany[];
-  games: GameProject[];
-  updates: GameUpdate[];
+  games: GameProjectRow[];
+  updates: IntelligenceItem[];
   gameMoves: GameMove[];
   stats: {
     companyCount: number;
@@ -82,6 +86,13 @@ export type RadarDatabaseSnapshot = {
     latestUpdateDate: string;
   };
   mapping: Record<keyof GameMove, string>;
+};
+
+export type DailySummary = {
+  date: string;
+  total: number;
+  highImportanceCount: number;
+  items: IntelligenceItem[];
 };
 
 export type RadarFilters = {
@@ -313,6 +324,7 @@ export function listIntelligenceItems(filters: RadarFilters = {}): IntelligenceI
           item.source,
           item.companyName,
           item.region,
+          item.date,
           item.operationMeaning,
         ].some((field) => field.toLowerCase().includes(query));
 
@@ -330,6 +342,25 @@ export function getTodayHighlights() {
   return recentItems.slice(0, 3);
 }
 
+export function getDailySummaries(): DailySummary[] {
+  const byDate = new Map<string, IntelligenceItem[]>();
+
+  listIntelligenceItems({ dateWindow: "all" }).forEach((item) => {
+    const items = byDate.get(item.date) ?? [];
+    items.push(item);
+    byDate.set(item.date, items);
+  });
+
+  return Array.from(byDate.entries())
+    .map(([date, items]) => ({
+      date,
+      total: items.length,
+      highImportanceCount: items.filter((item) => item.importance >= 4).length,
+      items: items.sort((a, b) => b.importance - a.importance || b.date.localeCompare(a.date)),
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
 export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatabaseSnapshot {
   const gameMoves = listGameMoves(filters);
   const filteredCompanies = companies.filter((company) =>
@@ -338,31 +369,38 @@ export function getRadarDatabaseSnapshot(filters: RadarFilters = {}): RadarDatab
       filters.q
     )
   );
-  const filteredGames = games.filter((game) =>
+  const filteredGames = games
+    .map((game) => ({
+      ...game,
+      companyName: findCompany(game.companyId)?.name ?? "",
+    }))
+    .filter((game) =>
+      includesKeyword(
+        [
+          game.name,
+          game.companyName,
+          game.aliases,
+          game.stage,
+          game.genres,
+          game.releaseRegions,
+          game.latestProgress,
+          game.otherInfo,
+          game.ttOperationStatus,
+          game.discoverySource,
+        ],
+        filters.q
+      )
+    );
+  const filteredUpdates = listIntelligenceItems(filters).filter((update) =>
     includesKeyword(
       [
-        game.name,
-        game.aliases,
-        game.stage,
-        game.genres,
-        game.releaseRegions,
-        game.latestProgress,
-        game.otherInfo,
-        game.ttOperationStatus,
-        game.discoverySource,
-      ],
-      filters.q
-    )
-  );
-  const filteredUpdates = updates.filter((update) =>
-    includesKeyword(
-      [
+        update.name,
         update.summary,
         update.detail,
-        update.sourceName,
-        update.updateType,
-        update.gameId,
-        update.companyId,
+        update.source,
+        update.moveType,
+        update.companyName,
+        update.category,
         update.sourceUrl,
       ],
       filters.q

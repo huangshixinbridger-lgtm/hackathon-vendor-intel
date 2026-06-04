@@ -16,16 +16,17 @@ type TableConfig = {
 
 const tableConfigs: TableConfig[] = [
   {
-    name: "gameMoves",
-    title: "GameMove 契约输出",
+    name: "updates",
+    title: "游戏动态表",
     columns: [
-      ["gameId", "gameId"],
-      ["name", "游戏"],
-      ["category", "品类"],
+      ["date", "日期"],
       ["moveType", "动作"],
+      ["name", "游戏/厂商"],
+      ["companyName", "公司"],
+      ["category", "品类"],
       ["summary", "摘要"],
       ["source", "来源"],
-      ["date", "日期"],
+      ["importance", "重要度"],
     ],
   },
   {
@@ -33,25 +34,12 @@ const tableConfigs: TableConfig[] = [
     title: "游戏项目表",
     columns: [
       ["name", "游戏"],
-      ["companyId", "公司ID"],
+      ["companyName", "公司"],
       ["stage", "阶段"],
       ["genres", "品类"],
       ["releaseRegions", "区域"],
       ["latestProgress", "最新进展"],
       ["relevanceScore", "关注度"],
-    ],
-  },
-  {
-    name: "updates",
-    title: "游戏动态表",
-    columns: [
-      ["updateDate", "日期"],
-      ["updateType", "类型"],
-      ["summary", "摘要"],
-      ["gameId", "游戏ID"],
-      ["companyId", "公司ID"],
-      ["sourceName", "来源"],
-      ["importance", "重要度"],
     ],
   },
   {
@@ -84,6 +72,18 @@ function pickRows(snapshot: RadarDatabaseSnapshot, table: RadarTableName) {
   return snapshot[table] as Array<Record<string, unknown>>;
 }
 
+function renderCell(row: Record<string, unknown>, key: string) {
+  if (key === "source" && typeof row.source === "string" && typeof row.sourceUrl === "string" && row.sourceUrl) {
+    return (
+      <a className="text-accent-foreground hover:underline" href={row.sourceUrl} target="_blank" rel="noreferrer">
+        {row.source}
+      </a>
+    );
+  }
+
+  return <span className="line-clamp-3">{formatValue(row[key])}</span>;
+}
+
 function formatRefreshTime() {
   return new Intl.DateTimeFormat("zh-CN", {
     hour: "2-digit",
@@ -95,7 +95,7 @@ function formatRefreshTime() {
 
 export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarDatabaseSnapshot }) {
   const [snapshot, setSnapshot] = useState(initialSnapshot);
-  const [activeTable, setActiveTable] = useState<RadarTableName>("gameMoves");
+  const [activeTable, setActiveTable] = useState<RadarTableName>("updates");
   const [query, setQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState("页面加载后刷新");
@@ -196,7 +196,7 @@ export function RadarDatabaseView({ initialSnapshot }: { initialSnapshot: RadarD
                   <tr key={`${activeTable}-${index}`} className="border-t">
                     {activeConfig.columns.map(([key]) => (
                       <td key={key} className="max-w-[320px] px-3 py-3 align-top">
-                        <span className="line-clamp-3">{formatValue(row[key])}</span>
+                        {renderCell(row, key)}
                       </td>
                     ))}
                   </tr>

@@ -5,7 +5,7 @@ import {
   type RadarTableName,
 } from "../../database";
 
-const tableNames = new Set<RadarTableName>(["companies", "games", "updates", "gameMoves"]);
+const tableNames = new Set<RadarTableName>(["companies", "games", "updates"]);
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);

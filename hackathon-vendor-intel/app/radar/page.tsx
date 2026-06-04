@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Database, Filter, Radar, Search, Table2 } from "lucide-react";
+import { ArrowRight, CalendarDays, Database, Radar, Search, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,15 +16,12 @@ import {
 type RadarPageProps = {
   searchParams?: {
     q?: string;
-    type?: GameMove["moveType"];
     gameId?: string;
     window?: DateWindow;
     importance?: string;
   };
 };
 
-const moveTypes: Array<GameMove["moveType"]> = ["新游", "版本更新", "大版本", "活动"];
-const validMoveTypes = new Set<GameMove["moveType"]>(moveTypes);
 const validDateWindows = new Set<DateWindow>(["24h", "7d", "30d", "all"]);
 
 const dateWindows: Array<{ value: DateWindow; label: string }> = [
@@ -46,50 +43,17 @@ function parseMinImportance(value?: string) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
-function buildTypeHref(
-  query?: string,
-  dateWindow?: DateWindow,
-  minImportance?: number,
-  gameId?: string,
-  type?: GameMove["moveType"]
-) {
-  const params = new URLSearchParams();
-
-  if (query) {
-    params.set("q", query);
-  }
-
-  if (dateWindow && dateWindow !== "7d") {
-    params.set("window", dateWindow);
-  }
-
-  if (minImportance) {
-    params.set("importance", String(minImportance));
-  }
-
-  if (gameId) {
-    params.set("gameId", gameId);
-  }
-
-  if (type) {
-    params.set("type", type);
-  }
-
-  return params.size ? `/radar?${params.toString()}` : "/radar";
-}
-
 export default function RadarPage({ searchParams }: RadarPageProps) {
   const query = searchParams?.q?.trim();
-  const selectedType =
-    searchParams?.type && validMoveTypes.has(searchParams.type) ? searchParams.type : undefined;
   const selectedWindow =
     searchParams?.window && validDateWindows.has(searchParams.window) ? searchParams.window : "7d";
   const minImportance = parseMinImportance(searchParams?.importance);
   const selectedGameId = searchParams?.gameId?.trim();
-  const filters = { q: query, type: selectedType, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
+  const filters = { q: query, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
   const intelligenceItems = listIntelligenceItems(filters);
   const snapshot = getRadarDatabaseSnapshot(filters);
   const highlights = getTodayHighlights();
+  const summaryItems = listIntelligenceItems({ dateWindow: selectedWindow });
   const latestMove = intelligenceItems[0];
   const highImportanceCount = intelligenceItems.filter((item) => item.importance >= 4).length;
 
@@ -111,7 +75,6 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
             <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input name="q" placeholder="搜索游戏、厂商、品类、来源" defaultValue={query} className="pl-9" />
           </div>
-          {selectedType ? <input type="hidden" name="type" value={selectedType} /> : null}
           {selectedGameId ? <input type="hidden" name="gameId" value={selectedGameId} /> : null}
           <select
             name="window"
@@ -143,12 +106,20 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           <div>
             <CardTitle>今日摘要</CardTitle>
             <CardDescription>
-              近 7 天重点情报 Top 3，按重要度和时间排序，点击可定位到情报卡片。
+              先看最重要几条，也可以展开扫当前时间窗的全部摘要信息。
             </CardDescription>
           </div>
-          <Badge variant="outline">高重要度 {highImportanceCount} 条</Badge>
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="outline">高重要度 {highImportanceCount} 条</Badge>
+            <Link
+              href="/radar/summaries"
+              className="inline-flex h-7 items-center rounded-md border border-input bg-card px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              查看历史摘要
+            </Link>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <div className="grid gap-3 lg:grid-cols-3">
             {highlights.map((item) => (
               <a
@@ -164,6 +135,22 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
                 <p className="mt-1 line-clamp-2 text-muted-foreground">{item.summary}</p>
               </a>
             ))}
+          </div>
+          <div className="rounded-md border">
+            <div className="border-b bg-muted px-3 py-2 text-sm font-medium">全部摘要信息</div>
+            <div className="max-h-72 overflow-y-auto">
+              {summaryItems.map((item) => (
+                <a
+                  key={`summary-${item.id}`}
+                  href={`#move-${item.id}`}
+                  className="grid gap-1 border-b px-3 py-3 text-sm last:border-b-0 hover:bg-accent md:grid-cols-[96px_120px_1fr]"
+                >
+                  <span className="text-muted-foreground">{item.date}</span>
+                  <span>{item.moveType} · 重要度 {item.importance}</span>
+                  <span className="line-clamp-1">{item.name}：{item.summary}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -209,49 +196,6 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
             <p className="truncate text-xs text-muted-foreground">{latestMove?.name ?? "暂无匹配结果"}</p>
           </CardContent>
         </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>字段映射</CardTitle>
-          <CardDescription>旧库表字段到当前契约 types/contract.ts 的 GameMove 映射。</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2 text-sm md:grid-cols-2">
-            {Object.entries(snapshot.mapping).map(([field, source]) => (
-              <div key={field} className="flex gap-2 rounded-md border bg-card px-3 py-2">
-                <code className="min-w-20 text-accent-foreground">{field}</code>
-                <span className="text-muted-foreground">{source}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="flex flex-wrap items-center gap-2">
-        <div className="mr-1 inline-flex items-center gap-1 text-sm text-muted-foreground">
-          <Filter className="h-4 w-4" />
-          事件类型
-        </div>
-        <Link
-          href={buildTypeHref(query, selectedWindow, minImportance, selectedGameId)}
-          className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
-            selectedType ? "bg-card hover:bg-accent" : "bg-primary text-primary-foreground"
-          }`}
-        >
-          全部
-        </Link>
-        {moveTypes.map((type) => (
-          <Link
-            key={type}
-            href={buildTypeHref(query, selectedWindow, minImportance, selectedGameId, type)}
-            className={`rounded-md border px-3 py-1.5 text-sm transition-colors ${
-              selectedType === type ? "bg-primary text-primary-foreground" : "bg-card hover:bg-accent"
-            }`}
-          >
-            {type}
-          </Link>
-        ))}
       </div>
 
       <div className="grid gap-4">
