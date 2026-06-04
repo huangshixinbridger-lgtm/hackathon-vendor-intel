@@ -32,7 +32,6 @@ const tableConfigs: TableConfig[] = [
       ["name", "游戏"],
       ["vendorName", "游戏厂商"],
       ["stage", "阶段"],
-      ["releaseDate", "Release"],
       ["genres", "品类"],
       ["platforms", "平台"],
       ["releaseRegions", "区域"],
