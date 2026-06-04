@@ -519,6 +519,327 @@ const eggyPartyDocument: DiagnosisDocument = {
   ]
 };
 
+type CompactDiagnosisInput = {
+  gameId: string;
+  游戏: string;
+  文档链接: string;
+  统计周期: {
+    开始: string;
+    结束: string;
+    天数: number;
+  };
+  总体判断: {
+    标签: string[];
+    是否继续投: boolean;
+    预算优先级: string;
+    一句话结论: string;
+  };
+  短视频: {
+    总VV: number;
+    日均VV: number;
+    总投稿数: number;
+    日均投稿数: number;
+    条均vv: number;
+    消费排名: number;
+    供给排名: number;
+    条均vv排名: number;
+    重点消费国: string[];
+    优先国家: string[];
+    最大消费国: string;
+    最大供给国: string;
+  };
+  直播: {
+    总看播时长_min: number;
+    日均看播时长_min: number;
+    总看播人数: number;
+    日均看播人数: number;
+    总开播主播: number;
+    日均开播主播: number;
+    单位开播产出: number;
+    消费排名: number;
+    供给排名: number;
+    单位开播产出排名: number;
+    重点消费国: string[];
+    优先国家: string[];
+    最大消费国: string;
+    最大供给国: string;
+  };
+};
+
+const compactDiagnosisInputs: CompactDiagnosisInput[] = [
+  {
+    gameId: "knives-out",
+    游戏: "荒野行动",
+    文档链接: "https://bytedance.larkoffice.com/docx/ChnpdhX2Do0uLwxhK0Wcckscnnh",
+    统计周期: { 开始: "2026-03-03", 结束: "2026-06-01", 天数: 91 },
+    总体判断: {
+      标签: ["量级落后", "核心市场高度集中", "仍有局部高回报空间"],
+      是否继续投: true,
+      预算优先级: "先守 JP 核心盘，再做高回报国家提效",
+      一句话结论: "短视频和直播总量都在竞品末位，但单位效率不差，后续不适合全局扩量，适合守核心盘+定向补量。"
+    },
+    短视频: {
+      总VV: 263998190,
+      日均VV: 2901079.01,
+      总投稿数: 94906,
+      日均投稿数: 1042.92,
+      条均vv: 2781.68,
+      消费排名: 5,
+      供给排名: 5,
+      条均vv排名: 1,
+      重点消费国: ["JP", "PH", "VN", "ID", "KH"],
+      优先国家: ["JP", "MX", "US"],
+      最大消费国: "JP",
+      最大供给国: "JP"
+    },
+    直播: {
+      总看播时长_min: 154823665.62,
+      日均看播时长_min: 1701358.96,
+      总看播人数: 42055376,
+      日均看播人数: 462146.99,
+      总开播主播: 173422,
+      日均开播主播: 1905.74,
+      单位开播产出: 892.76,
+      消费排名: 5,
+      供给排名: 5,
+      单位开播产出排名: 2,
+      重点消费国: ["JP", "PH", "US", "TW", "BR"],
+      优先国家: ["JP", "US", "PH"],
+      最大消费国: "JP",
+      最大供给国: "JP"
+    }
+  },
+  {
+    gameId: "marvel-rivals",
+    游戏: "漫威争锋",
+    文档链接: "https://bytedance.larkoffice.com/docx/Ilm0dvmkLoqiONx5LIvcTf5QnHd",
+    统计周期: { 开始: "2026-03-03", 结束: "2026-06-01", 天数: 91 },
+    总体判断: {
+      标签: ["短视频规模已进同类头部梯队", "直播消费已站稳第二位", "直播单位开播产出排第一"],
+      是否继续投: true,
+      预算优先级: "新增预算优先给直播，短视频预算以提效为主",
+      一句话结论: "短视频和直播两端都已经成型，直播边际效率更强，后续预算可以继续投，但要把短视频稳盘和直播加码拆开执行。"
+    },
+    短视频: {
+      总VV: 3752325852,
+      日均VV: 41234350.02,
+      总投稿数: 1548245,
+      日均投稿数: 17013.68,
+      条均vv: 2423.6,
+      消费排名: 2,
+      供给排名: 2,
+      条均vv排名: 4,
+      重点消费国: ["US", "GB", "MX", "CA", "SA"],
+      优先国家: ["US", "MX", "PH"],
+      最大消费国: "US",
+      最大供给国: "US"
+    },
+    直播: {
+      总看播时长_min: 195993346.93,
+      日均看播时长_min: 2153773.04,
+      总看播人数: 83661093,
+      日均看播人数: 919352.67,
+      总开播主播: 256198,
+      日均开播主播: 2815.36,
+      单位开播产出: 765.01,
+      消费排名: 2,
+      供给排名: 3,
+      单位开播产出排名: 1,
+      重点消费国: ["US", "MX", "SA", "GB", "MY"],
+      优先国家: ["US", "MY", "AU", "EG"],
+      最大消费国: "US",
+      最大供给国: "US"
+    }
+  },
+  {
+    gameId: "once-human",
+    游戏: "七日世界",
+    文档链接: "https://bytedance.larkoffice.com/docx/AalndHdaJossuCxYr9Yc6nkqnJu",
+    统计周期: { 开始: "2026-03-03", 结束: "2026-06-01", 天数: 91 },
+    总体判断: {
+      标签: ["短视频有爆点", "直播处于中后段", "仍有明显竞品压力"],
+      是否继续投: true,
+      预算优先级: "优先投短视频，直播作为第二顺位",
+      一句话结论: "短视频总量不大但条均vv最高，直播仍在追赶阶段，后续预算更适合先放大短视频高回报市场，再补直播核心消费盘。"
+    },
+    短视频: {
+      总VV: 6957775,
+      日均VV: 76459.07,
+      总投稿数: 1042,
+      日均投稿数: 11.45,
+      条均vv: 6677.33,
+      消费排名: 5,
+      供给排名: 5,
+      条均vv排名: 1,
+      重点消费国: ["US", "TH", "PH", "TW", "PL"],
+      优先国家: ["US", "TW", "PL"],
+      最大消费国: "US",
+      最大供给国: "US"
+    },
+    直播: {
+      总看播时长_min: 8034950.62,
+      日均看播时长_min: 88296.16,
+      总看播人数: 2890439,
+      日均看播人数: 31763.07,
+      总开播主播: 15960,
+      日均开播主播: 175.38,
+      单位开播产出: 503.44,
+      消费排名: 4,
+      供给排名: 4,
+      单位开播产出排名: 4,
+      重点消费国: ["TH", "PH", "MY", "US", "BR"],
+      优先国家: ["TH", "MY", "PH"],
+      最大消费国: "TH",
+      最大供给国: "US"
+    }
+  }
+];
+
+function formatCompactNumber(value: number, unit = "") {
+  if (value >= 100000000) {
+    return `${(value / 100000000).toFixed(2)} 亿${unit}`;
+  }
+  if (value >= 10000) {
+    return `${(value / 10000).toFixed(2)} 万${unit}`;
+  }
+  return `${Math.round(value).toLocaleString()}${unit}`;
+}
+
+function compactInputToDocument(input: CompactDiagnosisInput): DiagnosisDocument {
+  const shortVideoMarkets = new Set(input.短视频.重点消费国);
+  const liveMarkets = new Set(input.直播.重点消费国);
+  const allMarkets = Array.from(new Set([...input.短视频.优先国家, ...input.直播.优先国家, input.短视频.最大消费国, input.直播.最大消费国])).slice(0, 6);
+
+  return {
+    gameId: input.gameId,
+    gameName: input.游戏,
+    title: `${input.游戏} TikTok 生态分析`,
+    subtitle: `${input.总体判断.标签.join(" + ")} + 预算建议`,
+    badge: "负责人：Rena",
+    sourceUrl: input.文档链接,
+    summary: {
+      headline: input.总体判断.预算优先级,
+      conclusion: input.总体判断.一句话结论,
+      priorityActions: [
+        input.短视频.优先国家.length ? `短视频：${input.短视频.优先国家.join(" / ")}` : "短视频提效",
+        input.直播.优先国家.length ? `直播：${input.直播.优先国家.join(" / ")}` : "直播结构优化",
+        input.总体判断.是否继续投 ? "继续投结构性预算" : "谨慎控制预算"
+      ],
+      talkTrack: `${input.游戏} 当前${input.总体判断.一句话结论} 短视频优先看 ${input.短视频.优先国家.join(" / ")}，直播优先看 ${input.直播.优先国家.join(" / ")}。`
+    },
+    kpis: [
+      { label: "短视频总 VV", value: formatCompactNumber(input.短视频.总VV), note: `消费第 ${input.短视频.消费排名} / 5` },
+      { label: "短视频投稿", value: formatCompactNumber(input.短视频.总投稿数), note: `供给第 ${input.短视频.供给排名} / 5` },
+      { label: "条均 VV", value: Math.round(input.短视频.条均vv).toLocaleString(), note: `条均第 ${input.短视频.条均vv排名} / 5` },
+      { label: "直播看播", value: formatCompactNumber(input.直播.总看播时长_min, " min"), note: `消费第 ${input.直播.消费排名} / 5` }
+    ],
+    marketBars: allMarkets.map((market) => ({
+      market,
+      shortVideo: input.短视频.优先国家.includes(market) ? 100 : shortVideoMarkets.has(market) ? 72 : 28,
+      live: input.直播.优先国家.includes(market) ? 100 : liveMarkets.has(market) ? 72 : 24
+    })),
+    charts: [
+      {
+        title: "短视频核心指标",
+        unit: "",
+        color: "bg-primary",
+        rows: [
+          { name: "总 VV（亿）", value: Number((input.短视频.总VV / 100000000).toFixed(2)) },
+          { name: "总投稿（万）", value: Number((input.短视频.总投稿数 / 10000).toFixed(2)) },
+          { name: "条均 VV（千）", value: Number((input.短视频.条均vv / 1000).toFixed(2)) }
+        ]
+      },
+      {
+        title: "直播核心指标",
+        unit: "",
+        color: "bg-emerald-500",
+        rows: [
+          { name: "看播时长（亿 min）", value: Number((input.直播.总看播时长_min / 100000000).toFixed(2)) },
+          { name: "看播人数（万）", value: Number((input.直播.总看播人数 / 10000).toFixed(2)) },
+          { name: "开播主播（万）", value: Number((input.直播.总开播主播 / 10000).toFixed(2)) },
+          { name: "单位产出", value: Number(input.直播.单位开播产出.toFixed(2)) }
+        ]
+      }
+    ],
+    blocks: [
+      {
+        type: "callout",
+        variant: input.总体判断.是否继续投 ? "success" : "warning",
+        title: `总体判断：${input.总体判断.标签.join(" / ")}`,
+        text: input.总体判断.一句话结论
+      },
+      { type: "sectionHeader", title: "1. 分析范围与口径" },
+      {
+        type: "bulletList",
+        items: [
+          `统计周期：${input.统计周期.开始} 至 ${input.统计周期.结束}，共 ${input.统计周期.天数} 天。`,
+          "分析模块：短视频 + 直播。",
+          `预算优先级：${input.总体判断.预算优先级}。`
+        ]
+      },
+      { type: "sectionHeader", title: "2. 短视频生态位分析" },
+      {
+        type: "paragraph",
+        text: `${input.游戏} 短视频总 VV ${formatCompactNumber(input.短视频.总VV)}、总投稿 ${formatCompactNumber(input.短视频.总投稿数)}、条均 VV ${Math.round(input.短视频.条均vv).toLocaleString()}。消费排名第 ${input.短视频.消费排名}，供给排名第 ${input.短视频.供给排名}，条均 VV 排名第 ${input.短视频.条均vv排名}。`
+      },
+      {
+        type: "table",
+        headers: ["指标", "数值", "排名", "判断"],
+        rows: [
+          ["总 VV", formatCompactNumber(input.短视频.总VV), `第 ${input.短视频.消费排名} / 5`, input.短视频.消费排名 <= 2 ? "已进入头部梯队" : "总量仍需补强"],
+          ["总投稿数", formatCompactNumber(input.短视频.总投稿数), `第 ${input.短视频.供给排名} / 5`, input.短视频.供给排名 <= 2 ? "供给规模已成型" : "供给规模仍偏小"],
+          ["条均 VV", Math.round(input.短视频.条均vv).toLocaleString(), `第 ${input.短视频.条均vv排名} / 5`, input.短视频.条均vv排名 <= 2 ? "单位效率有优势" : "单位效率需提效"]
+        ]
+      },
+      {
+        type: "bulletList",
+        items: [
+          `重点消费国：${input.短视频.重点消费国.join("、")}。`,
+          `优先国家：${input.短视频.优先国家.join("、")}。`,
+          `最大消费国 / 最大供给国：${input.短视频.最大消费国} / ${input.短视频.最大供给国}。`
+        ]
+      },
+      { type: "sectionHeader", title: "3. 直播生态位分析" },
+      {
+        type: "paragraph",
+        text: `${input.游戏} 直播总看播时长 ${formatCompactNumber(input.直播.总看播时长_min, " min")}、总开播主播 ${formatCompactNumber(input.直播.总开播主播)}、单位开播产出 ${input.直播.单位开播产出.toFixed(2)}。消费排名第 ${input.直播.消费排名}，供给排名第 ${input.直播.供给排名}，单位产出排名第 ${input.直播.单位开播产出排名}。`
+      },
+      {
+        type: "table",
+        headers: ["指标", "数值", "排名", "判断"],
+        rows: [
+          ["总看播时长", formatCompactNumber(input.直播.总看播时长_min, " min"), `第 ${input.直播.消费排名} / 5`, input.直播.消费排名 <= 2 ? "消费承接较强" : "看播规模仍需补强"],
+          ["总开播主播", formatCompactNumber(input.直播.总开播主播), `第 ${input.直播.供给排名} / 5`, input.直播.供给排名 <= 2 ? "供给相对充足" : "供给规模需优化"],
+          ["单位开播产出", input.直播.单位开播产出.toFixed(2), `第 ${input.直播.单位开播产出排名} / 5`, input.直播.单位开播产出排名 <= 2 ? "单位效率有优势" : "单位承接需提效"]
+        ]
+      },
+      {
+        type: "bulletList",
+        items: [
+          `重点消费国：${input.直播.重点消费国.join("、")}。`,
+          `优先国家：${input.直播.优先国家.join("、")}。`,
+          `最大消费国 / 最大供给国：${input.直播.最大消费国} / ${input.直播.最大供给国}。`
+        ]
+      },
+      { type: "sectionHeader", title: "4. 预算建议" },
+      {
+        type: "bulletList",
+        items: [
+          input.总体判断.是否继续投 ? "建议继续投达人激励预算。" : "不建议继续扩大达人激励预算。",
+          `预算优先级：${input.总体判断.预算优先级}。`,
+          `短视频优先国家：${input.短视频.优先国家.join("、")}。`,
+          `直播优先国家：${input.直播.优先国家.join("、")}。`
+        ]
+      },
+      { type: "sectionHeader", title: "5. 对项目方可直接复用的话术" },
+      {
+        type: "paragraph",
+        text: `${input.游戏} ${input.总体判断.一句话结论} 后续建议短视频优先看 ${input.短视频.优先国家.join(" / ")}，直播优先看 ${input.直播.优先国家.join(" / ")}，用结构性预算替代全局平均铺量。`
+      }
+    ]
+  };
+}
+
 const diagnosisDocuments: Record<string, DiagnosisDocument> = {
   nte: diagnosisDocument,
   bloodstrike: bloodStrikeDocument,
@@ -526,6 +847,13 @@ const diagnosisDocuments: Record<string, DiagnosisDocument> = {
   eggy: eggyPartyDocument,
   eggyparty: eggyPartyDocument,
   "eggy-party": eggyPartyDocument,
+  ...Object.fromEntries(compactDiagnosisInputs.flatMap((input) => {
+    const document = compactInputToDocument(input);
+    return [
+      [input.gameId, document],
+      [input.游戏, document]
+    ];
+  })),
 };
 
 const markdownDocuments: Record<string, { gameName: string; fileName: string; sourceUrl?: string }> = {
