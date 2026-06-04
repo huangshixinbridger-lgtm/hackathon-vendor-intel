@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Database, Radar, Search, Table2 } from "lucide-react";
+import { Database, Radar, Search, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -241,65 +241,6 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           </CardContent>
         </Card>
       </div>
-
-      <div className="grid gap-4">
-        {intelligenceItems.map((move) => (
-          <Card key={`${move.id}-${move.gameId}`} id={`move-${move.id}`}>
-            <CardHeader className="gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div className="space-y-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge className={`border ${moveTone[move.moveType]}`}>{move.moveType}</Badge>
-                  <Badge variant="outline">{move.category}</Badge>
-                  {move.companyName ? <Badge variant="outline">{move.companyName}</Badge> : null}
-                  <Badge variant={move.importance >= 4 ? "accent" : "outline"}>重要度 {move.importance}</Badge>
-                  <span className="text-sm text-muted-foreground">{move.date}</span>
-                </div>
-                <div>
-                  <CardTitle>{move.name}</CardTitle>
-                  <CardDescription>{move.source}</CardDescription>
-                </div>
-              </div>
-              <Badge variant="outline">GameMove</Badge>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm leading-6">{move.summary}</p>
-              <div className="rounded-md border bg-muted/40 px-3 py-3 text-sm">
-                <div className="mb-1 font-medium">对运营意味着什么</div>
-                <p className="leading-6 text-muted-foreground">{move.operationMeaning}</p>
-              </div>
-              <div className="flex flex-col gap-2 border-t pt-4 sm:flex-row">
-                <Link
-                  href={`/radar?gameId=${move.gameId}`}
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  看雷达
-                </Link>
-                <Link
-                  href={`/diagnosis?gameId=${move.gameId}`}
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  去诊断
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href={`/gip?gameId=${move.gameId}`}
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-input bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  看 GIP 消耗
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {intelligenceItems.length === 0 ? (
-        <Card>
-          <CardContent className="py-10 text-center text-sm text-muted-foreground">
-            没有匹配的游戏动作。换个关键词或筛选条件再试试。
-          </CardContent>
-        </Card>
-      ) : null}
 
       <RadarDatabaseView initialSnapshot={snapshot} />
     </div>
