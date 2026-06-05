@@ -148,8 +148,90 @@ function loadImportedData(): ImportedRadarData {
 
 const imported = loadImportedData();
 
-const companies = imported.companies;
-const games = imported.games;
+// —— DEMO：hero 游戏 Free Fire，用于「搜一个游戏从头跑到尾」端到端联动演示（非真实抓取数据）——
+const DEMO_FREEFIRE_COMPANY: VendorCompany = {
+  id: "demo-garena",
+  name: "Garena",
+  aliases: ["Sea Limited", "Garena Free Fire"],
+  region: "SEA",
+  headquartersCountry: "SG",
+  description: "Free Fire 发行商（演示数据）",
+  website: "https://www.garena.com",
+  updatedAt: "2026-06-04T00:00:00.000Z",
+};
+
+const DEMO_FREEFIRE_GAME: GameProject = {
+  id: "freefire",
+  name: "Free Fire",
+  aliases: ["Garena Free Fire", "FF", "自由火"],
+  companyId: "demo-garena",
+  releaseRegions: ["BR", "ID", "TH", "IN", "MX"],
+  stage: "运营中",
+  expectedLaunchDate: "",
+  genres: ["Shooter", "Battle Royale"],
+  otherInfo: "演示数据：TikTok 全球播放头部的吃鸡手游",
+  ttOperationStatus: "重点运营",
+  latestProgress: "OB49 版本 + 巴西嘉年华联动节点",
+  officialSite: "https://ff.garena.com",
+  platforms: ["iOS", "Android"],
+  relevanceScore: 95,
+  discoverySource: "演示数据",
+  updatedAt: "2026-06-04T00:00:00.000Z",
+};
+
+const DEMO_FREEFIRE_RAW_UPDATES: Omit<GameUpdate, "updateType">[] = [
+  {
+    id: "demo-ff-1",
+    summary: "Free Fire OB49 版本上线：新角色、新模式与巴西嘉年华联动",
+    updateDate: "2026-06-04",
+    gameId: "freefire",
+    companyId: "demo-garena",
+    detail: "OB49 大版本更新上线，新增角色与限时模式，并开启巴西嘉年华联动活动（演示数据）。",
+    sourceUrl: "https://ff.garena.com",
+    sourceName: "Garena 官方（演示）",
+    sourcePublishedAt: "Thu, 04 Jun 2026 09:00:00 +0000",
+    contentHash: "demo-ff-ob49",
+    importance: 4,
+    feishuRecordId: "",
+    createdAt: "2026-06-04T00:00:00.000Z",
+    updatedAt: "2026-06-04T00:00:00.000Z",
+  },
+  {
+    id: "demo-ff-2",
+    summary: "Free Fire x 巴西嘉年华联动活动开启，限定皮肤返场",
+    updateDate: "2026-06-03",
+    gameId: "freefire",
+    companyId: "demo-garena",
+    detail: "围绕巴西嘉年华的联动活动开启，限定皮肤返场，BR 市场短视频与直播热度走高（演示数据）。",
+    sourceUrl: "https://ff.garena.com",
+    sourceName: "Garena 官方（演示）",
+    sourcePublishedAt: "Wed, 03 Jun 2026 09:00:00 +0000",
+    contentHash: "demo-ff-carnival",
+    importance: 3,
+    feishuRecordId: "",
+    createdAt: "2026-06-03T00:00:00.000Z",
+    updatedAt: "2026-06-03T00:00:00.000Z",
+  },
+  {
+    id: "demo-ff-3",
+    summary: "Free Fire World Series 2026 总决赛定档，赛事内容预热",
+    updateDate: "2026-05-20",
+    gameId: "freefire",
+    companyId: "demo-garena",
+    detail: "FFWS 2026 总决赛定档，官方启动赛事内容预热，适合提前规划赛事期达人放量（演示数据）。",
+    sourceUrl: "https://ff.garena.com",
+    sourceName: "Garena 官方（演示）",
+    sourcePublishedAt: "Tue, 20 May 2026 09:00:00 +0000",
+    contentHash: "demo-ff-ffws",
+    importance: 4,
+    feishuRecordId: "",
+    createdAt: "2026-05-20T00:00:00.000Z",
+    updatedAt: "2026-05-20T00:00:00.000Z",
+  },
+];
+
+const companies = [DEMO_FREEFIRE_COMPANY, ...imported.companies];
+const games = [DEMO_FREEFIRE_GAME, ...imported.games];
 
 const gameById = new Map(games.map((game) => [game.id, game]));
 const companyById = new Map(companies.map((company) => [company.id, company]));
@@ -256,7 +338,7 @@ function getOperationMeaning(move: GameMove, update: GameUpdate, company?: Vendo
   return `${owner}${move.name}有持续动态更新，适合纳入日常巡逻，结合诊断与 GIP 消耗判断是否存在跟进机会。${sourceHint}。`;
 }
 
-const updates: GameUpdate[] = imported.updates.map((update) => {
+const updates: GameUpdate[] = [...DEMO_FREEFIRE_RAW_UPDATES, ...imported.updates].map((update) => {
   const game = gameById.get(update.gameId);
 
   return {
@@ -267,21 +349,29 @@ const updates: GameUpdate[] = imported.updates.map((update) => {
 });
 
 function saveImportedData() {
-  writeFileSync(
-    dataPath,
-    `${JSON.stringify(
-      {
-        ...(imported as object),
-        importedAt: new Date().toISOString(),
-        companies,
-        games,
-        updates: imported.updates,
-      },
-      null,
-      2
-    )}\n`,
-    "utf8"
-  );
+  // serverless/只读文件系统（如 Vercel）上写 bundle 目录会抛 EROFS。
+  // 刷新后的数据已在内存里更新并返回，落盘失败不应让请求 500，因此吞掉写盘错误。
+  try {
+    writeFileSync(
+      dataPath,
+      `${JSON.stringify(
+        {
+          ...(imported as object),
+          importedAt: new Date().toISOString(),
+          // 落盘只保留真实抓取数据；DEMO（Free Fire）仅存在于内存，不写回 radar-data.json
+          companies: imported.companies,
+          games: imported.games,
+          updates: imported.updates,
+        },
+        null,
+        2
+      )}\n`,
+      "utf8"
+    );
+  } catch (error) {
+    console.warn("[radar] 跳过 radar-data.json 落盘（只读文件系统/serverless）：", error);
+    return;
+  }
 }
 
 function findGame(gameId: string) {
@@ -547,6 +637,13 @@ export async function runRadarRefresh(): Promise<RefreshResult> {
 }
 
 export function ensureRadarScheduler() {
+  // 定时器只在长期运行的进程（本地 dev / 自托管 node）里才有意义。
+  // serverless（Vercel/Lambda、edge runtime）是临时实例，setInterval 不会可靠触发，
+  // 反而每个热实例泄漏一个计时器，故这里直接跳过；定时刷新改由外部 cron 打 /radar/api/refresh。
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NEXT_RUNTIME === "edge") {
+    return;
+  }
+
   const globalState = globalThis as typeof globalThis & {
     __radarSchedulerStarted?: boolean;
     __radarSchedulerLastRun?: string;

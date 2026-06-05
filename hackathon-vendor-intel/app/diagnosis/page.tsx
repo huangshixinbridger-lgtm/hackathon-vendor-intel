@@ -4,7 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { getDiagnosisDocument, DocumentBlock } from "./diagnosisData";
+import { resolveDiagnosisDocument, DocumentBlock } from "./diagnosisData";
+import { resolveGame } from "@/lib/games";
 
 type DiagnosisPageProps = { searchParams?: { gameId?: string; q?: string } };
 
@@ -191,8 +192,9 @@ function renderBlock(block: DocumentBlock, index: number) {
 }
 
 export default async function DiagnosisPage({ searchParams }: DiagnosisPageProps) {
-  const gameId = searchParams?.gameId || searchParams?.q || "yanyun";
-  const diagnosisDocument = await getDiagnosisDocument(gameId);
+  const requestedId = searchParams?.gameId || searchParams?.q;
+  const { document: diagnosisDocument, matched } = await resolveDiagnosisDocument(requestedId);
+  const requestedName = requestedId ? resolveGame(requestedId)?.name ?? requestedId : "";
   const conclusion =
     diagnosisDocument.summary?.conclusion ??
     pickParagraph(diagnosisDocument.blocks, "继续投") ??
@@ -211,6 +213,11 @@ export default async function DiagnosisPage({ searchParams }: DiagnosisPageProps
 
   return (
     <div className="space-y-6">
+      {!matched && requestedName ? (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          诊断模块暂无「{requestedName}」的报告，下方为默认示例（{diagnosisDocument.gameName}）。
+        </div>
+      ) : null}
       <section className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
