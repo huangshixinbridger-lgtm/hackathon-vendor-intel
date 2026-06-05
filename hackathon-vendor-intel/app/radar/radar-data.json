@@ -1,6 +1,6 @@
 {
   "importedFrom": "/Users/bytedance/Documents/GameMoveTest/data/game_tracker.sqlite3",
-  "importedAt": "2026-06-04T13:32:10.312Z",
+  "importedAt": "2026-06-05T07:08:22.257Z",
   "companies": [
     {
       "id": "1",
@@ -15,7 +15,7 @@
       "website": "https://www.nintendo.com/countryselector/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Nintendo",
       "wikipediaTitle": "Nintendo",
       "wikipediaDescription": "Japanese video game company"
@@ -33,7 +33,7 @@
       "website": "https://www.sie.com",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Sony_Interactive_Entertainment",
       "wikipediaTitle": "Sony Interactive Entertainment",
       "wikipediaDescription": "American digital entertainment company owned by Sony"
@@ -67,7 +67,7 @@
       "website": "https://www.ea.com",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Electronic_Arts",
       "wikipediaTitle": "Electronic Arts",
       "wikipediaDescription": "American video game company"
@@ -103,7 +103,7 @@
       "website": "https://www.ubisoft.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft",
       "wikipediaTitle": "Ubisoft",
       "wikipediaDescription": "French video game company"
@@ -120,7 +120,7 @@
       "website": "https://www.bandainamcoent.com",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Bandai_Namco_Entertainment",
       "wikipediaTitle": "Bandai Namco Entertainment",
       "wikipediaDescription": "Japanese video game publisher"
@@ -141,7 +141,7 @@
       "website": "https://www.square-enix.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Square_Enix",
       "wikipediaTitle": "Square Enix",
       "wikipediaDescription": "Japanese entertainment company"
@@ -175,7 +175,7 @@
       "website": "https://www.capcom.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Capcom",
       "wikipediaTitle": "Capcom",
       "wikipediaDescription": "Japanese video game company"
@@ -244,7 +244,7 @@
       "website": "https://www.mihoyo.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/MiHoYo",
       "wikipediaTitle": "MiHoYo",
       "wikipediaDescription": "Chinese video game developer"
@@ -262,7 +262,7 @@
       "website": "https://www.163.com/",
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-04T10:01:53.964Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
       "wikipediaUrl": "https://en.wikipedia.org/wiki/NetEase",
       "wikipediaTitle": "NetEase",
       "wikipediaDescription": "Chinese Internet technology company"
@@ -949,6 +949,801 @@
       "wikipediaDescription": "Chinese video game developer and publisher",
       "createdAt": "2026-06-04T10:01:53.964Z",
       "updatedAt": "2026-06-04T10:01:53.964Z"
+    },
+    {
+      "id": "193",
+      "name": "FromSoftware",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/FromSoftware",
+      "wikipediaTitle": "FromSoftware",
+      "wikipediaDescription": "Japanese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "194",
+      "name": "Larian Studios",
+      "aliases": [],
+      "region": "Belgium",
+      "headquartersCountry": "Belgium",
+      "description": "Belgian video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Larian_Studios",
+      "wikipediaTitle": "Larian Studios",
+      "wikipediaDescription": "Belgian video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "195",
+      "name": "Pocketpair",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Pocketpair",
+      "wikipediaTitle": "Pocketpair",
+      "wikipediaDescription": "Japanese video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "196",
+      "name": "Warner Bros. Games",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American publisher, developer, licensor, and distributor of video games",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Warner_Bros._Games",
+      "wikipediaTitle": "Warner Bros. Games",
+      "wikipediaDescription": "American publisher, developer, licensor, and distributor of video games",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "197",
+      "name": "Portkey Games",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "video game label",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Portkey_Games",
+      "wikipediaTitle": "Portkey Games",
+      "wikipediaDescription": "video game label",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "198",
+      "name": "Avalanche Software",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game developer based in Salt Lake City, Utah",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Avalanche_Software",
+      "wikipediaTitle": "Avalanche Software",
+      "wikipediaDescription": "American video game developer based in Salt Lake City, Utah",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "199",
+      "name": "Arrowhead Game Studios",
+      "aliases": [],
+      "region": "Sweden",
+      "headquartersCountry": "Sweden",
+      "description": "Swedish video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Arrowhead_Game_Studios",
+      "wikipediaTitle": "Arrowhead Game Studios",
+      "wikipediaDescription": "Swedish video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "200",
+      "name": "Game Science",
+      "aliases": [],
+      "region": "People's Republic of China",
+      "headquartersCountry": "People's Republic of China",
+      "description": "Chinese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Game_Science",
+      "wikipediaTitle": "Game Science",
+      "wikipediaDescription": "Chinese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "201",
+      "name": "Nintendo Entertainment Planning & Development",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Nintendo's largest internal video game studio",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Nintendo_Entertainment_Planning_%26_Development",
+      "wikipediaTitle": "Nintendo Entertainment Planning & Development",
+      "wikipediaDescription": "Nintendo's largest internal video game studio",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "202",
+      "name": "Monolith Soft Inc.",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Monolith_Soft",
+      "wikipediaTitle": "Monolith Soft",
+      "wikipediaDescription": "Japanese video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "203",
+      "name": "Activision Blizzard",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Activision_Blizzard",
+      "wikipediaTitle": "Activision Blizzard",
+      "wikipediaDescription": "American video game company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "204",
+      "name": "Blizzard Entertainment",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game publisher and developer owned by Microsoft",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Blizzard_Entertainment",
+      "wikipediaTitle": "Blizzard Entertainment",
+      "wikipediaDescription": "American video game publisher and developer owned by Microsoft",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "205",
+      "name": "Blizzard Albany",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Blizzard_Albany",
+      "wikipediaTitle": "Blizzard Albany",
+      "wikipediaDescription": "American video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "206",
+      "name": "COGNOSPHERE",
+      "aliases": [],
+      "region": "Singapore",
+      "headquartersCountry": "Singapore",
+      "description": "video game publisher, subsidiary company of miHoYo",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/HoYoverse",
+      "wikipediaTitle": "HoYoverse",
+      "wikipediaDescription": "video game publisher, subsidiary company of miHoYo",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "207",
+      "name": "NIJIGEN GAMES",
+      "aliases": [],
+      "region": "Taiwan",
+      "headquartersCountry": "Taiwan",
+      "description": "Taiwanese video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "NIJIGEN GAMES",
+      "wikipediaDescription": "Taiwanese video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "208",
+      "name": "Kuro Games",
+      "aliases": [],
+      "region": "People's Republic of China",
+      "headquartersCountry": "People's Republic of China",
+      "description": "Chinese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kuro_Games",
+      "wikipediaTitle": "Kuro Games",
+      "wikipediaDescription": "Chinese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "209",
+      "name": "The Pokémon Company",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese brand management, production, and marketing company responsible for marketing and licensing the Pokémon franchise",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Pok%C3%A9mon_Company",
+      "wikipediaTitle": "The Pokémon Company",
+      "wikipediaDescription": "Japanese brand management, production, and marketing company responsible for marketing and licensing the Pokémon franchise",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "210",
+      "name": "Creatures",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Creatures_Inc.",
+      "wikipediaTitle": "Creatures Inc.",
+      "wikipediaDescription": "Japanese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "211",
+      "name": "DeNA",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "provider of mobile portals and e-commerce websites based in Japan",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/DeNA",
+      "wikipediaTitle": "DeNA",
+      "wikipediaDescription": "provider of mobile portals and e-commerce websites based in Japan",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "212",
+      "name": "Scopely",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "interactive entertainment, video game company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Scopely",
+      "wikipediaTitle": "Scopely",
+      "wikipediaDescription": "interactive entertainment, video game company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "213",
+      "name": "Zeekerss",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "American video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Zeekerss",
+      "wikipediaTitle": "Zeekerss",
+      "wikipediaDescription": "American video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "214",
+      "name": "Hooded Horse",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hooded_Horse",
+      "wikipediaTitle": "Hooded Horse",
+      "wikipediaDescription": "American video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "215",
+      "name": "Keen Games",
+      "aliases": [],
+      "region": "Germany",
+      "headquartersCountry": "Germany",
+      "description": "German video games developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Keen Games",
+      "wikipediaDescription": "German video games developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "216",
+      "name": "PlayStation PC LLC",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "PlayStation PC LLC",
+      "wikipediaDescription": "video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "217",
+      "name": "Shift Up",
+      "aliases": [],
+      "region": "South Korea",
+      "headquartersCountry": "South Korea",
+      "description": "South Korean video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Shift_Up",
+      "wikipediaTitle": "Shift Up",
+      "wikipediaDescription": "South Korean video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "218",
+      "name": "PlayStation Studios XDev",
+      "aliases": [],
+      "region": "United Kingdom",
+      "headquartersCountry": "United Kingdom",
+      "description": "PlayStation development team",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "PlayStation Studios XDev",
+      "wikipediaDescription": "PlayStation development team",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "219",
+      "name": "Focus Entertainment",
+      "aliases": [],
+      "region": "France",
+      "headquartersCountry": "France",
+      "description": "French video game developer and publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Focus_Entertainment",
+      "wikipediaTitle": "Focus Entertainment",
+      "wikipediaDescription": "French video game developer and publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "220",
+      "name": "Saber Interactive",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Saber_Interactive",
+      "wikipediaTitle": "Saber Interactive",
+      "wikipediaDescription": "American video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "221",
+      "name": "Bethesda Softworks",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bethesda_Softworks",
+      "wikipediaTitle": "Bethesda Softworks",
+      "wikipediaDescription": "American video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "222",
+      "name": "MachineGames",
+      "aliases": [],
+      "region": "Sweden",
+      "headquartersCountry": "Sweden",
+      "description": "Swedish video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/MachineGames",
+      "wikipediaTitle": "MachineGames",
+      "wikipediaDescription": "Swedish video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "223",
+      "name": "Team Asobi",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Team_Asobi",
+      "wikipediaTitle": "Team Asobi",
+      "wikipediaDescription": "Japanese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "224",
+      "name": "Playstack",
+      "aliases": [],
+      "region": "United Kingdom",
+      "headquartersCountry": "United Kingdom",
+      "description": "British video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Playstack",
+      "wikipediaDescription": "British video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "225",
+      "name": "LocalThunk",
+      "aliases": [],
+      "region": "Canada",
+      "headquartersCountry": "Canada",
+      "description": "Canadian video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "LocalThunk",
+      "wikipediaDescription": "Canadian video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "226",
+      "name": "Hazelight Studios",
+      "aliases": [],
+      "region": "Sweden",
+      "headquartersCountry": "Sweden",
+      "description": "video game developer based in Stockholm, Sweden",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hazelight_Studios",
+      "wikipediaTitle": "Hazelight Studios",
+      "wikipediaDescription": "video game developer based in Stockholm, Sweden",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "227",
+      "name": "Kepler Interactive",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "video game publisher",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kepler_Interactive",
+      "wikipediaTitle": "Kepler Interactive",
+      "wikipediaDescription": "video game publisher",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "228",
+      "name": "Sandfall Interactive",
+      "aliases": [],
+      "region": "France",
+      "headquartersCountry": "France",
+      "description": "French video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Sandfall Interactive",
+      "wikipediaDescription": "French video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "229",
+      "name": "Deep Silver",
+      "aliases": [],
+      "region": "Germany",
+      "headquartersCountry": "Germany",
+      "description": "German developer and publisher of video games",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Deep_Silver",
+      "wikipediaTitle": "Deep Silver",
+      "wikipediaDescription": "German developer and publisher of video games",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "230",
+      "name": "Warhorse Studios",
+      "aliases": [],
+      "region": "Czech Republic",
+      "headquartersCountry": "Czech Republic",
+      "description": "Czech video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Warhorse_Studios",
+      "wikipediaTitle": "Warhorse Studios",
+      "wikipediaDescription": "Czech video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "231",
+      "name": "Ubisoft Quebec",
+      "aliases": [],
+      "region": "Canada",
+      "headquartersCountry": "Canada",
+      "description": "Canadian video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Quebec",
+      "wikipediaTitle": "Ubisoft Quebec",
+      "wikipediaDescription": "Canadian video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "232",
+      "name": "Ubisoft Belgrade",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "video game developer based in Belgrade, Serbia",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Belgrade",
+      "wikipediaTitle": "Ubisoft Belgrade",
+      "wikipediaDescription": "video game developer based in Belgrade, Serbia",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "233",
+      "name": "Ubisoft Bordeaux",
+      "aliases": [],
+      "region": "France",
+      "headquartersCountry": "France",
+      "description": "video game studio",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Bordeaux",
+      "wikipediaTitle": "Ubisoft Bordeaux",
+      "wikipediaDescription": "video game studio",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "234",
+      "name": "Ubisoft Chengdu",
+      "aliases": [],
+      "region": "People's Republic of China",
+      "headquartersCountry": "People's Republic of China",
+      "description": "Chinese video game company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Chengdu",
+      "wikipediaTitle": "Ubisoft Chengdu",
+      "wikipediaDescription": "Chinese video game company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "235",
+      "name": "Ubisoft Kyiv",
+      "aliases": [],
+      "region": "Ukraine",
+      "headquartersCountry": "Ukraine",
+      "description": "Ukrainian video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Kyiv",
+      "wikipediaTitle": "Ubisoft Kyiv",
+      "wikipediaDescription": "Ukrainian video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "236",
+      "name": "Ubisoft Montpellier",
+      "aliases": [],
+      "region": "France",
+      "headquartersCountry": "France",
+      "description": "French video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Montpellier",
+      "wikipediaTitle": "Ubisoft Montpellier",
+      "wikipediaDescription": "French video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "237",
+      "name": "Ubisoft Montreal",
+      "aliases": [],
+      "region": "Canada",
+      "headquartersCountry": "Canada",
+      "description": "Canadian video game developer owned by French publisher Ubisoft",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Montreal",
+      "wikipediaTitle": "Ubisoft Montreal",
+      "wikipediaDescription": "Canadian video game developer owned by French publisher Ubisoft",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "238",
+      "name": "Ubisoft Odesa",
+      "aliases": [],
+      "region": "Ukraine",
+      "headquartersCountry": "Ukraine",
+      "description": "Ukrainian video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Odesa",
+      "wikipediaTitle": "Ubisoft Odesa",
+      "wikipediaDescription": "Ukrainian video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "239",
+      "name": "Ubisoft Osaka",
+      "aliases": [],
+      "region": "Japan",
+      "headquartersCountry": "Japan",
+      "description": "Japanese subsidary of Ubisoft",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Ubisoft Osaka",
+      "wikipediaDescription": "Japanese subsidary of Ubisoft",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "240",
+      "name": "Ubisoft Pune",
+      "aliases": [],
+      "region": "India",
+      "headquartersCountry": "India",
+      "description": "Indian video game development company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "",
+      "wikipediaTitle": "Ubisoft Pune",
+      "wikipediaDescription": "Indian video game development company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "241",
+      "name": "Ubisoft Romania",
+      "aliases": [],
+      "region": "Romania",
+      "headquartersCountry": "Romania",
+      "description": "video game developer based in Bucharest, Romania",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Bucharest",
+      "wikipediaTitle": "Ubisoft Bucharest",
+      "wikipediaDescription": "video game developer based in Bucharest, Romania",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "242",
+      "name": "Ubisoft Shanghai",
+      "aliases": [],
+      "region": "People's Republic of China",
+      "headquartersCountry": "People's Republic of China",
+      "description": "Chinese video game developer",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Shanghai",
+      "wikipediaTitle": "Ubisoft Shanghai",
+      "wikipediaDescription": "Chinese video game developer",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "243",
+      "name": "Ubisoft Singapore",
+      "aliases": [],
+      "region": "Singapore",
+      "headquartersCountry": "Singapore",
+      "description": "Singapore division of video game development company Ubisoft",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Singapore",
+      "wikipediaTitle": "Ubisoft Singapore",
+      "wikipediaDescription": "Singapore division of video game development company Ubisoft",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "244",
+      "name": "Ubisoft Sofia",
+      "aliases": [],
+      "region": "未知",
+      "headquartersCountry": "",
+      "description": "Bulgarian video game company",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Ubisoft_Sofia",
+      "wikipediaTitle": "Ubisoft Sofia",
+      "wikipediaDescription": "Bulgarian video game company",
+      "createdAt": "2026-06-05T07:03:20.104Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
+    },
+    {
+      "id": "245",
+      "name": "Bethesda Game Studios",
+      "aliases": [],
+      "region": "United States",
+      "headquartersCountry": "United States",
+      "description": "American in-house development team at Bethesda Softworks",
+      "website": "",
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Bethesda_Game_Studios",
+      "wikipediaTitle": "Bethesda Game Studios",
+      "wikipediaDescription": "American in-house development team at Bethesda Softworks",
+      "createdAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z"
     }
   ],
   "games": [
@@ -1049,27 +1844,40 @@
       "releaseRegions": [
         "全球"
       ],
-      "stage": "长期运营",
+      "stage": "正式上线",
       "expectedLaunchDate": "",
       "genres": [
         "RPG",
         "卡牌"
       ],
-      "otherInfo": "二次元；回合制；跨平台",
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
       "ttOperationStatus": "未知",
       "ttNotes": "",
-      "latestProgress": "2026-05-22｜Honkai: Star Rail version 4.3 update ‘The Lethe Below the Living’ launches June 1",
+      "latestProgress": "Wikipedia release date: 2023-04-26",
       "officialSite": "",
-      "platforms": [],
-      "relevanceScore": 100,
-      "relevanceReasons": [
-        "配置 watchlist 收录"
+      "platforms": [
+        "iOS",
+        "Microsoft Windows",
+        "Android",
+        "PlayStation 5"
       ],
-      "discoverySource": "lark_base_import",
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
       "isBackfilled": true,
       "feishuRecordId": "",
       "createdAt": "2026-05-31T16:16:10+00:00",
-      "updatedAt": "2026-06-01T06:29:32+00:00"
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "publisher": "miHoYo / COGNOSPHERE / NIJIGEN GAMES",
+      "developer": "miHoYo",
+      "releaseDate": "2023-04-26",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Honkai:_Star_Rail",
+      "wikipediaTitle": "Honkai: Star Rail",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z"
     },
     {
       "id": "4",
@@ -4101,30 +4909,45 @@
       "id": "262",
       "name": "Zenless Zone Zero",
       "aliases": [],
-      "companyId": "145",
+      "companyId": "14",
       "releaseRegions": [
         "全球"
       ],
-      "stage": "长线运营",
+      "stage": "正式上线",
       "expectedLaunchDate": "",
       "genres": [
         "RPG-角色扮演"
       ],
-      "otherInfo": "后启示录都市 / 3D 赛博朋克未来",
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
       "ttOperationStatus": "未知",
       "ttNotes": "",
-      "latestProgress": "2026-06-01｜飞书多维表格导入",
+      "latestProgress": "Wikipedia release date: 2024-07-04",
       "officialSite": "",
-      "platforms": [],
-      "relevanceScore": 100,
-      "relevanceReasons": [
-        "飞书多维表格导入"
+      "platforms": [
+        "iOS",
+        "iPadOS",
+        "Android",
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
       ],
-      "discoverySource": "lark_base_import",
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
       "isBackfilled": true,
       "feishuRecordId": "",
       "createdAt": "2026-06-01T04:23:08+00:00",
-      "updatedAt": "2026-06-01T04:23:08+00:00"
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "publisher": "miHoYo / COGNOSPHERE / NIJIGEN GAMES",
+      "developer": "miHoYo",
+      "releaseDate": "2024-07-04",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Zenless_Zone_Zero",
+      "wikipediaTitle": "Zenless Zone Zero",
+      "wikipediaDescription": "2024 action role-playing game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z"
     },
     {
       "id": "263",
@@ -9335,6 +10158,1293 @@
       "wikipediaUrl": "https://en.wikipedia.org/wiki/Once_Human_(video_game)",
       "wikipediaTitle": "Once Human (video game)",
       "wikipediaDescription": "2024 video game developed by Starry Studio"
+    },
+    {
+      "id": "450",
+      "name": "Elden Ring",
+      "aliases": [],
+      "companyId": "7",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "soulslike",
+        "dark fantasy video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2022-02-25",
+      "officialSite": "",
+      "publisher": "Bandai Namco Entertainment / FromSoftware",
+      "developer": "FromSoftware",
+      "releaseDate": "2022-02-25",
+      "platforms": [
+        "Microsoft Windows",
+        "Xbox One",
+        "PlayStation 4",
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Elden_Ring",
+      "wikipediaTitle": "Elden Ring",
+      "wikipediaDescription": "2022 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "451",
+      "name": "Baldur's Gate 3",
+      "aliases": [],
+      "companyId": "194",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "role-playing video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-08-03",
+      "officialSite": "",
+      "publisher": "Larian Studios",
+      "developer": "Larian Studios",
+      "releaseDate": "2023-08-03",
+      "platforms": [
+        "Microsoft Windows",
+        "macOS",
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Linux"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Baldur%27s_Gate_3",
+      "wikipediaTitle": "Baldur's Gate 3",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "452",
+      "name": "Palworld",
+      "aliases": [],
+      "companyId": "195",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game",
+        "survival game",
+        "monster-taming game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-01-19",
+      "officialSite": "",
+      "publisher": "Pocketpair",
+      "developer": "Pocketpair",
+      "releaseDate": "2024-01-19",
+      "platforms": [
+        "Microsoft Windows",
+        "Xbox Series X and Series S",
+        "Xbox One",
+        "macOS",
+        "PlayStation 5"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Palworld",
+      "wikipediaTitle": "Palworld",
+      "wikipediaDescription": "Upcoming video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "453",
+      "name": "Hogwarts Legacy",
+      "aliases": [],
+      "companyId": "196",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "role-playing video game",
+        "action role-playing game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-02-10",
+      "officialSite": "",
+      "publisher": "Warner Bros. Games",
+      "developer": "Portkey Games / Avalanche Software",
+      "releaseDate": "2023-02-10",
+      "platforms": [
+        "PlayStation 5",
+        "PlayStation 4",
+        "Microsoft Windows",
+        "Xbox One",
+        "Xbox Series X and Series S",
+        "Nintendo Switch",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Hogwarts_Legacy",
+      "wikipediaTitle": "Hogwarts Legacy",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "454",
+      "name": "Helldivers 2",
+      "aliases": [],
+      "companyId": "2",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "third-person shooter",
+        "horde shooter"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-02-08",
+      "officialSite": "",
+      "publisher": "Sony Interactive Entertainment",
+      "developer": "Arrowhead Game Studios",
+      "releaseDate": "2024-02-08",
+      "platforms": [
+        "PlayStation 5",
+        "Microsoft Windows",
+        "Linux",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Helldivers_2",
+      "wikipediaTitle": "Helldivers 2",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "455",
+      "name": "Black Myth: Wukong",
+      "aliases": [],
+      "companyId": "200",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game",
+        "action role-playing game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-08-20",
+      "officialSite": "",
+      "publisher": "Game Science",
+      "developer": "Game Science",
+      "releaseDate": "2024-08-20",
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Black_Myth:_Wukong",
+      "wikipediaTitle": "Black Myth: Wukong",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "456",
+      "name": "Starfield",
+      "aliases": [
+        "Starfield (video game)"
+      ],
+      "companyId": "221",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "science fiction video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-09-01",
+      "officialSite": "",
+      "publisher": "Bethesda Softworks",
+      "developer": "Bethesda Game Studios",
+      "releaseDate": "2023-09-01",
+      "platforms": [
+        "Microsoft Windows",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Starfield_(video_game)",
+      "wikipediaTitle": "Starfield (video game)",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "457",
+      "name": "The Legend of Zelda: Tears of the Kingdom",
+      "aliases": [],
+      "companyId": "1",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game",
+        "post-apocalyptic video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-05-12",
+      "officialSite": "",
+      "publisher": "Nintendo",
+      "developer": "Nintendo Entertainment Planning & Development / Monolith Soft Inc.",
+      "releaseDate": "2023-05-12",
+      "platforms": [
+        "Nintendo Switch",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Tears_of_the_Kingdom",
+      "wikipediaTitle": "The Legend of Zelda: Tears of the Kingdom",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "458",
+      "name": "Final Fantasy XVI",
+      "aliases": [],
+      "companyId": "8",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-06-22",
+      "officialSite": "",
+      "publisher": "Square Enix",
+      "developer": "Square Enix",
+      "releaseDate": "2023-06-22",
+      "platforms": [
+        "PlayStation 5",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Final_Fantasy_XVI",
+      "wikipediaTitle": "Final Fantasy XVI",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "459",
+      "name": "Diablo IV",
+      "aliases": [],
+      "companyId": "203",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "role-playing video game",
+        "action role-playing game",
+        "dungeon crawl",
+        "hack and slash",
+        "dark fantasy video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-06-06",
+      "officialSite": "",
+      "publisher": "Activision Blizzard",
+      "developer": "Blizzard Entertainment / Blizzard Albany",
+      "releaseDate": "2023-06-06",
+      "platforms": [
+        "PlayStation 4",
+        "Xbox One",
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Diablo_IV",
+      "wikipediaTitle": "Diablo IV",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "460",
+      "name": "Street Fighter 6",
+      "aliases": [],
+      "companyId": "10",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "fighting game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-06-02",
+      "officialSite": "",
+      "publisher": "Capcom",
+      "developer": "Capcom",
+      "releaseDate": "2023-06-02",
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 4",
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Street_Fighter_6",
+      "wikipediaTitle": "Street Fighter 6",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "461",
+      "name": "Resident Evil 4 (2023 video game)",
+      "aliases": [],
+      "companyId": "10",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "survival horror"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-03-24",
+      "officialSite": "",
+      "publisher": "Capcom",
+      "developer": "Capcom",
+      "releaseDate": "2023-03-24",
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 4",
+        "PlayStation 5",
+        "Xbox One",
+        "Xbox Series X and Series S",
+        "iOS",
+        "iPadOS",
+        "macOS",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Resident_Evil_4_(2023_video_game)",
+      "wikipediaTitle": "Resident Evil 4 (2023 video game)",
+      "wikipediaDescription": "Video game remake",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "462",
+      "name": "Marvel Rivals",
+      "aliases": [],
+      "companyId": "15",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "third-person shooter",
+        "hero shooter"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-12-06",
+      "officialSite": "",
+      "publisher": "NetEase Games",
+      "developer": "NetEase Games",
+      "releaseDate": "2024-12-06",
+      "platforms": [
+        "Microsoft Windows",
+        "macOS",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Marvel_Rivals",
+      "wikipediaTitle": "Marvel Rivals",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "463",
+      "name": "Wuthering Waves",
+      "aliases": [],
+      "companyId": "208",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "gacha game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-05-22",
+      "officialSite": "",
+      "publisher": "Kuro Games / NIJIGEN GAMES",
+      "developer": "Kuro Games",
+      "releaseDate": "2024-05-22",
+      "platforms": [
+        "iOS",
+        "Android",
+        "PlayStation 5",
+        "Microsoft Windows",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Wuthering_Waves",
+      "wikipediaTitle": "Wuthering Waves",
+      "wikipediaDescription": "2024 action role-playing video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "464",
+      "name": "Pokémon Trading Card Game Pocket",
+      "aliases": [
+        "Pokemon TCG Pocket"
+      ],
+      "companyId": "209",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "collectible card video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-10-30",
+      "officialSite": "",
+      "publisher": "The Pokémon Company",
+      "developer": "Creatures / DeNA",
+      "releaseDate": "2024-10-30",
+      "platforms": [
+        "iOS",
+        "Android"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Trading_Card_Game_Pocket",
+      "wikipediaTitle": "Pokémon Trading Card Game Pocket",
+      "wikipediaDescription": "2024 mobile video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "465",
+      "name": "Monopoly Go!",
+      "aliases": [],
+      "companyId": "212",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "board video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-03-22",
+      "officialSite": "",
+      "publisher": "Scopely",
+      "developer": "Scopely",
+      "releaseDate": "2023-03-22",
+      "platforms": [
+        "Android",
+        "iOS"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Monopoly_Go!",
+      "wikipediaTitle": "Monopoly Go!",
+      "wikipediaDescription": "2023 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "466",
+      "name": "Lethal Company",
+      "aliases": [],
+      "companyId": "213",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "horror video game",
+        "action-adventure game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2023-10-23",
+      "officialSite": "",
+      "publisher": "Zeekerss",
+      "developer": "Zeekerss",
+      "releaseDate": "2023-10-23",
+      "platforms": [
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Lethal_Company",
+      "wikipediaTitle": "Lethal Company",
+      "wikipediaDescription": "Video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "467",
+      "name": "Manor Lords",
+      "aliases": [],
+      "companyId": "214",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "real-time strategy"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-04-26",
+      "officialSite": "",
+      "publisher": "Hooded Horse",
+      "developer": "",
+      "releaseDate": "2024-04-26",
+      "platforms": [
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Manor_Lords",
+      "wikipediaTitle": "Manor Lords",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "468",
+      "name": "Enshrouded",
+      "aliases": [],
+      "companyId": "215",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "survival game",
+        "role-playing video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-01-24",
+      "officialSite": "",
+      "publisher": "Keen Games",
+      "developer": "Keen Games",
+      "releaseDate": "2024-01-24",
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Xbox Series X and Series S"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Enshrouded",
+      "wikipediaTitle": "Enshrouded",
+      "wikipediaDescription": "Upcoming video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "469",
+      "name": "Stellar Blade",
+      "aliases": [],
+      "companyId": "2",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game",
+        "role-playing video game",
+        "character-action video game",
+        "post-apocalyptic video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-04-26",
+      "officialSite": "",
+      "publisher": "Sony Interactive Entertainment / PlayStation PC LLC",
+      "developer": "Shift Up / PlayStation Studios XDev",
+      "releaseDate": "2024-04-26",
+      "platforms": [
+        "PlayStation 5",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Stellar_Blade",
+      "wikipediaTitle": "Stellar Blade",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "470",
+      "name": "Dragon's Dogma 2",
+      "aliases": [],
+      "companyId": "10",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "fantasy video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-03-22",
+      "officialSite": "",
+      "publisher": "Capcom",
+      "developer": "Capcom",
+      "releaseDate": "2024-03-22",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Dragon%27s_Dogma_2",
+      "wikipediaTitle": "Dragon's Dogma 2",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "471",
+      "name": "Warhammer 40,000: Space Marine 2",
+      "aliases": [],
+      "companyId": "219",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "third-person shooter",
+        "hack and slash"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-09-09",
+      "officialSite": "",
+      "publisher": "Focus Entertainment",
+      "developer": "Saber Interactive",
+      "releaseDate": "2024-09-09",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Warhammer_40,000:_Space_Marine_2",
+      "wikipediaTitle": "Warhammer 40,000: Space Marine 2",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "472",
+      "name": "Indiana Jones and the Great Circle",
+      "aliases": [],
+      "companyId": "221",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-12-09",
+      "officialSite": "",
+      "publisher": "Bethesda Softworks",
+      "developer": "MachineGames",
+      "releaseDate": "2024-12-09",
+      "platforms": [
+        "Xbox Series X and Series S",
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Indiana_Jones_and_the_Great_Circle",
+      "wikipediaTitle": "Indiana Jones and the Great Circle",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "473",
+      "name": "Astro Bot",
+      "aliases": [],
+      "companyId": "2",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "platform game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-09-06",
+      "officialSite": "",
+      "publisher": "Sony Interactive Entertainment",
+      "developer": "Team Asobi",
+      "releaseDate": "2024-09-06",
+      "platforms": [
+        "PlayStation 5"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Astro_Bot",
+      "wikipediaTitle": "Astro Bot",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "474",
+      "name": "Balatro",
+      "aliases": [],
+      "companyId": "224",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "roguelike deck-building game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2024-02-20",
+      "officialSite": "",
+      "publisher": "Playstack",
+      "developer": "LocalThunk",
+      "releaseDate": "2024-02-20",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "PlayStation 4",
+        "Xbox One",
+        "Nintendo Switch",
+        "Microsoft Windows",
+        "macOS",
+        "iOS",
+        "iPadOS",
+        "tvOS",
+        "Android",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Balatro",
+      "wikipediaTitle": "Balatro",
+      "wikipediaDescription": "2024 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "475",
+      "name": "Split Fiction",
+      "aliases": [],
+      "companyId": "4",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action-adventure game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2025-03-06",
+      "officialSite": "",
+      "publisher": "Electronic Arts",
+      "developer": "Hazelight Studios",
+      "releaseDate": "2025-03-06",
+      "platforms": [
+        "Microsoft Windows",
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Split_Fiction",
+      "wikipediaTitle": "Split Fiction",
+      "wikipediaDescription": "2025 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "476",
+      "name": "Clair Obscur: Expedition 33",
+      "aliases": [],
+      "companyId": "227",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "turn-based role-playing game",
+        "role-playing video game",
+        "Japanese role-playing video game",
+        "fantasy video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2025-04-24",
+      "officialSite": "",
+      "publisher": "Kepler Interactive",
+      "developer": "Sandfall Interactive",
+      "releaseDate": "2025-04-24",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Clair_Obscur:_Expedition_33",
+      "wikipediaTitle": "Clair Obscur: Expedition 33",
+      "wikipediaDescription": "2025 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "477",
+      "name": "Kingdom Come: Deliverance II",
+      "aliases": [],
+      "companyId": "229",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "historical video game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2025-02-04",
+      "officialSite": "",
+      "publisher": "Deep Silver",
+      "developer": "Warhorse Studios",
+      "releaseDate": "2025-02-04",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Kingdom_Come:_Deliverance_II",
+      "wikipediaTitle": "Kingdom Come: Deliverance II",
+      "wikipediaDescription": "2025 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "478",
+      "name": "Monster Hunter Wilds",
+      "aliases": [],
+      "companyId": "10",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2025-02-28",
+      "officialSite": "",
+      "publisher": "Capcom",
+      "developer": "Capcom",
+      "releaseDate": "2025-02-28",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Monster_Hunter_Wilds",
+      "wikipediaTitle": "Monster Hunter Wilds",
+      "wikipediaDescription": "2025 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
+    },
+    {
+      "id": "479",
+      "name": "Assassin's Creed Shadows",
+      "aliases": [],
+      "companyId": "6",
+      "releaseRegions": [
+        "全球"
+      ],
+      "stage": "正式上线",
+      "expectedLaunchDate": "",
+      "genres": [
+        "action role-playing game",
+        "stealth game"
+      ],
+      "otherInfo": "近 5 年热门游戏；由 Wikipedia/Wikidata 批量补齐",
+      "ttOperationStatus": "未知",
+      "ttNotes": "",
+      "latestProgress": "Wikipedia release date: 2025-03-20",
+      "officialSite": "",
+      "publisher": "Ubisoft",
+      "developer": "Ubisoft Quebec / Ubisoft Belgrade / Ubisoft Bordeaux / Ubisoft Chengdu / Ubisoft Kyiv / Ubisoft Montpellier / Ubisoft Montreal / Ubisoft Odesa / Ubisoft Osaka / Ubisoft Pune / Ubisoft Romania / Ubisoft Shanghai / Ubisoft Singapore / Ubisoft Sofia",
+      "releaseDate": "2025-03-20",
+      "platforms": [
+        "PlayStation 5",
+        "Xbox Series X and Series S",
+        "Microsoft Windows",
+        "macOS",
+        "Nintendo Switch 2"
+      ],
+      "relevanceScore": 90,
+      "relevanceReasons": [
+        "近 5 年热门游戏",
+        "Wikipedia/Wikidata 收录"
+      ],
+      "discoverySource": "Wikipedia/Wikidata popular games backfill",
+      "isBackfilled": true,
+      "feishuRecordId": "",
+      "wikipediaUrl": "https://en.wikipedia.org/wiki/Assassin%27s_Creed_Shadows",
+      "wikipediaTitle": "Assassin's Creed Shadows",
+      "wikipediaDescription": "2025 video game",
+      "wikipediaLastCheckedAt": "2026-06-05T07:05:57.362Z",
+      "updatedAt": "2026-06-05T07:05:57.362Z",
+      "createdAt": "2026-06-05T07:03:20.104Z"
     }
   ],
   "updates": [
