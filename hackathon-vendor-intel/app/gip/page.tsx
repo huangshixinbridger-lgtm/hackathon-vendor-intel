@@ -17,6 +17,7 @@ import {
   type BenchmarkRecord,
   type GIPStrategyRecord,
 } from "./data";
+import { resolveGame } from "@/lib/games";
 
 const allOption = "全部";
 
@@ -173,7 +174,13 @@ export default function GipPage() {
 function GipContent() {
   const searchParams = useSearchParams();
   const gameIdFromUrl = searchParams.get("gameId");
-  const initialRecord = mockGIPRecords.find((record) => record.gameId === gameIdFromUrl) ?? mockGIPRecords[0];
+  const matchedRecord = gameIdFromUrl
+    ? mockGIPRecords.find((record) => record.gameId === gameIdFromUrl)
+    : undefined;
+  // 携带了 gameId 但 GIP 没有这游戏的数据 → 明确提示，而不是静默展示第一条记录
+  const notFound = Boolean(gameIdFromUrl) && !matchedRecord;
+  const requestedName = gameIdFromUrl ? resolveGame(gameIdFromUrl)?.name ?? gameIdFromUrl : "";
+  const initialRecord = matchedRecord ?? mockGIPRecords[0];
   const [query, setQuery] = useState("");
   const [period, setPeriod] = useState(allOption);
   const [region, setRegion] = useState(allOption);
@@ -216,6 +223,11 @@ function GipContent() {
 
   return (
     <div className="space-y-6">
+      {notFound ? (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          GIP 面板暂无「{requestedName}」的投放数据，下方为默认示例（{initialRecord.game}），可用上方搜索/筛选查看已收录游戏。
+        </div>
+      ) : null}
       <section className="rounded-2xl border bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-6 text-white shadow-sm">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-3xl space-y-4">

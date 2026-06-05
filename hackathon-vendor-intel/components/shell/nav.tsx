@@ -6,7 +6,7 @@ import { Radar, Stethoscope, BarChart3, LayoutGrid, Sparkles } from "lucide-reac
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/", label: "总览", icon: LayoutGrid },
+  { href: "/classic", label: "总览", icon: LayoutGrid },
   { href: "/radar", label: "情报雷达", icon: Radar },
   { href: "/content-radar", label: "内容雷达", icon: Sparkles },
   { href: "/diagnosis", label: "诊断报告", icon: Stethoscope },
@@ -18,7 +18,7 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-card/80 backdrop-blur">
       <div className="container flex h-14 items-center gap-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
+        <Link href="/classic" className="flex items-center gap-2 font-semibold">
           <span className="grid h-7 w-7 place-items-center rounded-md bg-primary text-primary-foreground text-xs">GIP</span>
           <span className="hidden sm:inline">厂商情报与运营台</span>
         </Link>

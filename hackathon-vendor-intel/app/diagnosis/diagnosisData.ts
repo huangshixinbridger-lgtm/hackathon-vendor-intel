@@ -692,6 +692,49 @@ const compactDiagnosisInputs: CompactDiagnosisInput[] = [
       最大消费国: "TH",
       最大供给国: "US"
     }
+  },
+  {
+    // —— DEMO：hero 游戏 Free Fire，端到端联动演示数据（非真实统计）——
+    gameId: "freefire",
+    游戏: "Free Fire",
+    文档链接: "https://ff.garena.com",
+    统计周期: { 开始: "2026-03-03", 结束: "2026-06-01", 天数: 91 },
+    总体判断: {
+      标签: ["短视频规模头部", "直播承接强", "新兴市场基本盘稳"],
+      是否继续投: true,
+      预算优先级: "守 BR/ID 核心盘，短视频提效，直播补节点",
+      一句话结论: "Free Fire 在 TikTok 的短视频和直播都已是头部量级，新兴市场基本盘稳，后续预算更适合在核心市场做节点放量 + 内容提效，而不是全局粗放扩量。"
+    },
+    短视频: {
+      总VV: 286200000,
+      日均VV: 3145054.95,
+      总投稿数: 132480,
+      日均投稿数: 1455.82,
+      条均vv: 2160.7,
+      消费排名: 1,
+      供给排名: 1,
+      条均vv排名: 3,
+      重点消费国: ["BR", "ID", "TH", "IN", "MX"],
+      优先国家: ["BR", "ID", "MX"],
+      最大消费国: "BR",
+      最大供给国: "BR"
+    },
+    直播: {
+      总看播时长_min: 178400000,
+      日均看播时长_min: 1960439.56,
+      总看播人数: 68900000,
+      日均看播人数: 757142.86,
+      总开播主播: 214500,
+      日均开播主播: 2357.14,
+      单位开播产出: 831.7,
+      消费排名: 1,
+      供给排名: 1,
+      单位开播产出排名: 2,
+      重点消费国: ["BR", "ID", "TH", "MX", "VN"],
+      优先国家: ["BR", "ID", "TH"],
+      最大消费国: "BR",
+      最大供给国: "BR"
+    }
   }
 ];
 
@@ -1023,6 +1066,29 @@ export async function getDiagnosisDocument(gameId: string) {
   }
 
   return diagnosisDocument;
+}
+
+/** 诊断模块是否覆盖这个 gameId（用于跨模块跳转时判断「有没有这游戏的报告」）。 */
+export function hasDiagnosis(gameId: string) {
+  const normalized = normalizeGameId(gameId);
+  return Boolean(diagnosisDocuments[normalized] || markdownDocuments[normalized]);
+}
+
+const DEFAULT_DIAGNOSIS_GAME_ID = "yanyun";
+
+/**
+ * 解析诊断文档，并显式告知是否命中。命中 → 返回对应报告；未命中 → 返回默认示例(燕云)
+ * 并置 matched=false，让页面给出「未找到该游戏报告」的明确提示，而不是静默展示别的游戏。
+ */
+export async function resolveDiagnosisDocument(gameId?: string) {
+  const requestedId = gameId?.trim();
+  if (requestedId && hasDiagnosis(requestedId)) {
+    return { document: await getDiagnosisDocument(requestedId), matched: true as const };
+  }
+  if (!requestedId) {
+    return { document: await getDiagnosisDocument(DEFAULT_DIAGNOSIS_GAME_ID), matched: true as const };
+  }
+  return { document: await getDiagnosisDocument(DEFAULT_DIAGNOSIS_GAME_ID), matched: false as const };
 }
 
 export const availableDiagnosisGames = [
