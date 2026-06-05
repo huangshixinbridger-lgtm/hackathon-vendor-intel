@@ -104,28 +104,10 @@ export default function RadarView({
 
   return (
     <div className="mx-auto max-w-5xl px-2 pb-32">
-      {/* 游戏切换器 */}
-      {games.length > 0 && (
-        <div className="flex flex-wrap gap-2 pt-8">
-          {games.map((g) => (
-            <Link
-              key={g.id}
-              href={`/content-radar?gameId=${g.id}`}
-              className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
-                g.id === current
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-foreground/15 text-muted-foreground hover:border-foreground/40 hover:text-foreground"
-              }`}
-            >
-              {g.name}
-            </Link>
-          ))}
-        </div>
-      )}
 
       {/* Hero */}
       <motion.header initial="hidden" animate="show" variants={fadeUp} className="pt-8 pb-16">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">内容雷达 · TikTok 内容生态</p>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">内容洞察 · TikTok 内容生态</p>
         <h1 className="mt-4 text-6xl font-bold tracking-tight sm:text-7xl">{data.gameName}</h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
           这款游戏在 TikTok 上靠什么内容活着 —— {fmt(totalVV)} 播放背后的内容语言，

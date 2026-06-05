@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Database, Radar, Search, Table2 } from "lucide-react";
+import { Database, Radar, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import type { GameMove } from "@/types/contract";
+import { resolveGame } from "@/lib/games";
 import { RadarDatabaseView } from "./database-view";
 import {
   ensureRadarScheduler,
@@ -14,6 +14,7 @@ import {
   type DateWindow,
 } from "./database";
 import { RadarRefreshButton } from "./refresh-button";
+import { SearchBox } from "@/components/shell/search-box";
 
 type RadarPageProps = {
   searchParams?: {
@@ -68,7 +69,9 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
     searchParams?.window && validDateWindows.has(searchParams.window) ? searchParams.window : "30d";
   const minImportance = parseMinImportance(searchParams?.importance);
   const selectedGameId = searchParams?.gameId?.trim();
-  const filters = { q: query, gameId: selectedGameId, dateWindow: selectedWindow, minImportance };
+  const selectedGame = resolveGame(selectedGameId);
+  // gameId 现在是「动线选定的游戏」（由顶部外壳读取并串到后续步骤）；情报雷达是发现页，本身不按它过滤。
+  const filters = { q: query, dateWindow: selectedWindow, minImportance };
   const intelligenceItems = listIntelligenceItems(filters);
   const currentWindowItems = listIntelligenceItems({ dateWindow: selectedWindow });
   const snapshot = getRadarDatabaseSnapshot();
@@ -77,47 +80,55 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div className="space-y-2">
-          <Badge variant="accent" className="w-fit">负责人：Gardner</Badge>
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">① 情报雷达</h1>
-            <p className="text-muted-foreground">
-              自动追踪厂商/市场动作，回答最近谁有动作、运营该优先关注谁。
-            </p>
-          </div>
+      {/* 第一步「找游戏」：主动搜索定位一个游戏，或从下方推荐资讯里挑一个作为本次分析对象。 */}
+      <section className="rounded-2xl border bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-6 text-white shadow-sm">
+        <Badge variant="accent" className="w-fit">① 找游戏 · 情报雷达</Badge>
+        <h1 className="mt-3 text-2xl font-bold tracking-tight">搜一个游戏，或从下方资讯里挑一个</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
+          主动搜索锁定它，或浏览全网最新动态，选一个值得深入的游戏 —— 选定后右侧「下一步」带它走完内容洞察 → 经营诊断 → 历史付费分析。
+        </p>
+        <div className="mt-4">
+          <SearchBox placeholder="搜索一个游戏，例如：Free Fire / 燕云十六声" />
         </div>
-        <RadarRefreshButton />
+        {selectedGame ? (
+          <p className="mt-3 text-sm text-emerald-300">
+            已选定：<span className="font-semibold">{selectedGame.name}</span> —— 点右侧「下一步」进入内容洞察。
+          </p>
+        ) : null}
+      </section>
 
-        <form action="/radar" className="flex w-full max-w-3xl flex-col gap-2 lg:flex-row">
-          <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input name="q" placeholder="搜索游戏、厂商、品类、来源" defaultValue={query} className="pl-9" />
-          </div>
-          {selectedGameId ? <input type="hidden" name="gameId" value={selectedGameId} /> : null}
-          <select
-            name="window"
-            defaultValue={selectedWindow}
-            className="h-11 rounded-md border border-input bg-card px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            {dateWindows.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-          <select
-            name="importance"
-            defaultValue={minImportance ?? ""}
-            className="h-11 rounded-md border border-input bg-card px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <option value="">全部重要度</option>
-            <option value="4">重要度至少 4</option>
-            <option value="3">重要度至少 3</option>
-            <option value="2">重要度至少 2</option>
-          </select>
-          <Button type="submit">筛选</Button>
-        </form>
+      {/* 推荐资讯：全网最新动态（浏览用筛选 + 手动抓取）。 */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-lg font-semibold tracking-tight">推荐资讯 · 全网最新动态</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <RadarRefreshButton />
+          <form action="/radar" className="flex items-center gap-2">
+            {selectedGameId ? <input type="hidden" name="gameId" value={selectedGameId} /> : null}
+            {query ? <input type="hidden" name="q" value={query} /> : null}
+            <select
+              name="window"
+              defaultValue={selectedWindow}
+              className="h-10 rounded-md border border-input bg-card px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {dateWindows.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+            <select
+              name="importance"
+              defaultValue={minImportance ?? ""}
+              className="h-10 rounded-md border border-input bg-card px-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <option value="">全部重要度</option>
+              <option value="4">重要度至少 4</option>
+              <option value="3">重要度至少 3</option>
+              <option value="2">重要度至少 2</option>
+            </select>
+            <Button type="submit" variant="outline">筛选</Button>
+          </form>
+        </div>
       </div>
 
       <Card>
@@ -157,20 +168,35 @@ export default function RadarPage({ searchParams }: RadarPageProps) {
           <div id="today-updates" className="rounded-md border">
             <div className="border-b bg-muted px-3 py-2 text-sm font-medium">重要摘要 Top 5</div>
             <div className="divide-y">
-              {todaySummary.topItems.map((item) => (
-              <a
-                key={`highlight-${item.id}`}
-                href={`#move-${item.id}`}
-                className="grid gap-1 px-3 py-3 text-sm hover:bg-accent md:grid-cols-[96px_120px_1fr]"
-              >
-                <span className="text-muted-foreground">{item.date}</span>
-                <span className="flex items-center gap-2">
-                  <Badge className={`border ${moveTone[item.moveType]}`}>{item.moveType}</Badge>
-                  <span className="text-xs text-muted-foreground">{item.importance}</span>
-                </span>
-                <span className="line-clamp-1">{item.name}：{item.summary}</span>
-              </a>
-            ))}
+              {todaySummary.topItems.map((item) => {
+                // 动线衔接：资讯里能解析为注册表里的游戏 → 给一个「选定 →」，把它设为本次分析对象。
+                const g = resolveGame(item.name);
+                return (
+                  <div
+                    key={`highlight-${item.id}`}
+                    className="grid items-center gap-1 px-3 py-3 text-sm hover:bg-accent md:grid-cols-[96px_120px_1fr_auto]"
+                  >
+                    <span className="text-muted-foreground">{item.date}</span>
+                    <span className="flex items-center gap-2">
+                      <Badge className={`border ${moveTone[item.moveType]}`}>{item.moveType}</Badge>
+                      <span className="text-xs text-muted-foreground">{item.importance}</span>
+                    </span>
+                    <a href={`#move-${item.id}`} className="line-clamp-1 hover:underline">{item.name}：{item.summary}</a>
+                    {g ? (
+                      <Link
+                        href={`/radar?gameId=${encodeURIComponent(g.id)}`}
+                        className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-medium ${
+                          selectedGame?.id === g.id ? "bg-primary text-primary-foreground" : "text-primary hover:bg-primary/10"
+                        }`}
+                      >
+                        {selectedGame?.id === g.id ? "已选定" : "选定 →"}
+                      </Link>
+                    ) : (
+                      <span />
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 

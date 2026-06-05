@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { href: "/classic", label: "总览", icon: LayoutGrid },
   { href: "/radar", label: "情报雷达", icon: Radar },
-  { href: "/content-radar", label: "内容雷达", icon: Sparkles },
+  { href: "/content-radar", label: "内容洞察", icon: Sparkles },
   { href: "/diagnosis", label: "诊断报告", icon: Stethoscope },
   { href: "/gip", label: "GIP 面板", icon: BarChart3 },
 ];

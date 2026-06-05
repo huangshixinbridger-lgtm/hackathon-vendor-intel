@@ -238,7 +238,7 @@ export default async function DiagnosisPage({ searchParams }: DiagnosisPageProps
             </a>
           ) : null}
           <Link className={buttonVariants({ variant: "default", size: "sm" })} href={`/gip?gameId=${diagnosisDocument.gameId}`}>
-            查 GIP 消耗
+            历史付费分析
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
