@@ -5,12 +5,11 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { resolveGame, moduleGameId, firstAvailableModule, hrefForModule } from "@/lib/games";
+import { resolveGame } from "@/lib/games";
 
-// 搜索入口：Demo 动线的起点。输入游戏名 → 先经游戏注册表(lib/games.ts)解析：
-//  · 解析到的游戏在情报雷达有数据 → 进 /radar?gameId=（PRD 动线的入口），再用顶部「游戏上下文条」串到诊断/GIP；
-//  · 解析到但雷达没有 → 进该游戏第一个有数据的模块；
-//  · 解析不到（如普通厂商名/关键词）→ 沿用原行为，进情报雷达 ?q= 做关键词检索。
+// 搜索入口（动线第一步「找游戏 · 情报雷达」内）：输入游戏名 → 经注册表解析后，
+//  · 命中 → 留在情报雷达并「选定」该游戏（/radar?gameId=规范id），由右侧「下一步」箭头继续走动线；
+//  · 未命中 → /radar?q= 做关键词发现。
 export function SearchBox({ placeholder = "搜索一个游戏，例如：Free Fire / 燕云十六声" }: { placeholder?: string }) {
   const [q, setQ] = useState("");
   const router = useRouter();
@@ -23,17 +22,8 @@ export function SearchBox({ placeholder = "搜索一个游戏，例如：Free Fi
     }
     const game = resolveGame(query);
     if (game) {
-      const radarId = moduleGameId(game, "radar");
-      if (radarId) {
-        router.push(`/radar?gameId=${encodeURIComponent(radarId)}`);
-        return;
-      }
-      const first = firstAvailableModule(game);
-      const href = first ? hrefForModule(game, first) : undefined;
-      if (href) {
-        router.push(href);
-        return;
-      }
+      router.push(`/radar?gameId=${encodeURIComponent(game.id)}`);
+      return;
     }
     router.push(`/radar?q=${encodeURIComponent(query)}`);
   }

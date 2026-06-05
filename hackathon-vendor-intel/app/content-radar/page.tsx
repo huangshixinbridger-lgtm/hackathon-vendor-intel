@@ -37,7 +37,7 @@ export default function ContentRadarPage({
   if (!data) {
     return (
       <div className="mx-auto max-w-2xl px-2 py-20">
-        <h1 className="text-3xl font-bold tracking-tight">内容雷达</h1>
+        <h1 className="text-3xl font-bold tracking-tight">内容洞察</h1>
         <p className="mt-3 text-muted-foreground">
           暂无该游戏分析，试试 <code className="rounded bg-muted px-1.5 py-0.5 text-xs">?gameId=freefire</code>
         </p>

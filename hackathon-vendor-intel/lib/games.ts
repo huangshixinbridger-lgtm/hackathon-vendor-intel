@@ -22,9 +22,9 @@ export const MODULE_PATH: Record<ModuleKey, string> = {
 
 export const MODULE_LABEL: Record<ModuleKey, string> = {
   radar: "情报雷达",
-  contentRadar: "内容雷达",
+  contentRadar: "内容洞察",
   diagnosis: "诊断报告",
-  gip: "GIP 面板",
+  gip: "历史付费分析",
 };
 
 export interface GameEntry {

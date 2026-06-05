@@ -577,13 +577,37 @@ export function DiagnosisHolo({
               } />
               <Panel accent={accent}>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {marketBars.map((m) => (
-                    <div key={m.market} className="space-y-1.5">
-                      <div className="text-sm font-medium text-white/85">{m.market}</div>
-                      <div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full" style={{ width: `${m.shortVideo}%`, background: accent }} /></div>
-                      <div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-emerald-400" style={{ width: `${m.live}%` }} /></div>
-                    </div>
-                  ))}
+                  {marketBars.map((m) => {
+                    const d = m.shortVideo - m.live;
+                    const label = d > 0 ? "短视频主导" : d < 0 ? "直播主导" : m.shortVideo >= 85 ? "双强" : "均衡";
+                    const chipColor = d > 0 ? accent : d < 0 ? "#34d399" : m.shortVideo >= 85 ? "#fbbf24" : "#9aa3b2";
+                    return (
+                      <div key={m.market} className="rounded-xl border px-3 py-2.5" style={{ borderColor: `${accent}1a`, background: "rgba(255,255,255,0.02)" }}>
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <span className="text-sm font-medium text-white/85">{m.market}</span>
+                          <span className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium" style={{ background: `${chipColor}22`, color: chipColor }}>
+                            {label} · Δ{Math.abs(d)}
+                          </span>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-2">
+                            <span className="w-10 shrink-0 text-[10px] text-white/45">短视频</span>
+                            <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
+                              <div className="h-full rounded-full" style={{ width: `${m.shortVideo}%`, background: accent, boxShadow: `0 0 8px ${accent}` }} />
+                            </div>
+                            <span className="w-7 shrink-0 text-right text-[11px] font-semibold text-white">{m.shortVideo}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="w-10 shrink-0 text-[10px] text-white/45">直播</span>
+                            <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
+                              <div className="h-full rounded-full bg-emerald-400" style={{ width: `${m.live}%`, boxShadow: "0 0 8px rgba(52,211,153,0.7)" }} />
+                            </div>
+                            <span className="w-7 shrink-0 text-right text-[11px] font-semibold text-white">{m.live}</span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </Panel>
             </Reveal>

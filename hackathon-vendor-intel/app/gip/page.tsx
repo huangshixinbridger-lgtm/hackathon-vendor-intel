@@ -225,24 +225,19 @@ function GipContent() {
     <div className="space-y-6">
       {notFound ? (
         <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-          GIP 面板暂无「{requestedName}」的投放数据，下方为默认示例（{initialRecord.game}），可用上方搜索/筛选查看已收录游戏。
+          历史付费分析暂无「{requestedName}」的投放数据，下方为默认示例（{initialRecord.game}）。
         </div>
       ) : null}
+
       <section className="rounded-2xl border bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-6 text-white shadow-sm">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-3xl space-y-4">
-            <Badge variant="accent" className="w-fit">GIP 策略中台 Mock</Badge>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">GIP 投放查询与策略生成</h1>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
-                面向诊断报告的 GIP 独立数据模块：查询历史消耗、同品类 benchmark、活动复盘，并输出后续节点预算计划。
-              </p>
-            </div>
+        <div className="max-w-3xl space-y-4">
+          <Badge variant="accent" className="w-fit">历史付费分析</Badge>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">历史付费分析</h1>
+            <p className="mt-2 text-sm leading-6 text-slate-300">
+              该游戏的 GIP 历史投放复盘：历史消耗、同品类 benchmark、活动效果与后续节点预算参考。
+            </p>
           </div>
-          <Button onClick={() => setReportGenerated(true)} className="bg-white text-slate-950 hover:bg-slate-100">
-            <Sparkles className="h-4 w-4" />
-            一键生成 GIP 策略
-          </Button>
         </div>
       </section>
 
@@ -306,46 +301,6 @@ function GipContent() {
               ? `历史 GIP 已产生 ${formatNumber(strategy.totalVv)} VV，建议复投高效市场并控制低质供给。`
               : "当前暂无投放历史，建议先用同品类 benchmark 做小预算验证，再根据活动期表现放量。"}
           </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>查询与筛选</CardTitle>
-          <CardDescription>按游戏、时间、地区、品类和投放打法筛选 GIP 预算与消耗。</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
-          <label className="space-y-1.5 text-sm font-medium lg:col-span-2">
-            <span className="text-muted-foreground">搜索游戏 / 厂商 / 品类</span>
-            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：燕云、Shooter、NetEase" />
-          </label>
-          <SelectBox label="时间" value={period} options={uniq(mockGIPRecords.map((record) => record.period))} onChange={setPeriod} />
-          <SelectBox
-            label="地区"
-            value={region}
-            options={uniq(mockGIPRecords.flatMap((record) => [record.region, ...record.activities.map((item) => item.region)]))}
-            onChange={setRegion}
-          />
-          <SelectBox label="品类" value={category} options={uniq(mockGIPRecords.map((record) => record.category))} onChange={setCategory} />
-          <SelectBox
-            label="打法"
-            value={shape}
-            options={uniq(mockGIPRecords.map((record) => record.deliveryShape))}
-            onChange={setShape}
-          />
-          <Button
-            variant="outline"
-            className="lg:col-span-4"
-            onClick={() => {
-              setQuery("");
-              setPeriod(allOption);
-              setRegion(allOption);
-              setCategory(allOption);
-              setShape(allOption);
-            }}
-          >
-            重置筛选
-          </Button>
         </CardContent>
       </Card>
 
