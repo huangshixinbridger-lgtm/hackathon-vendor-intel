@@ -1,3 +1,5 @@
+// Native MediaWiki/Wikidata API smoke test.
+// This script does not depend on Codex Wikipedia MCP or any external skill runtime.
 const contactEmail = "gardner@bytedance.com";
 const appVersion = "gamemove/1.0";
 const userAgent = `${appVersion} (${contactEmail})`;

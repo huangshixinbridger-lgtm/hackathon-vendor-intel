@@ -1,0 +1,5 @@
+# Python dependencies for project-native Wikipedia tooling.
+#
+# The current Wikipedia/Wikidata integration is implemented with Node.js native
+# fetch in app/radar/wikipedia.ts and scripts/*.mjs. It does not require Codex
+# Wikipedia MCP, external skills, or Python packages.

@@ -1,5 +1,7 @@
 import type { GameProject } from "./database";
 
+// Native MediaWiki/Wikidata API client for radar data backfill.
+// This module does not depend on Codex Wikipedia MCP or any external skill runtime.
 export type WikipediaBackfillMode = "full" | "incremental";
 
 export type WikipediaGameInfo = {

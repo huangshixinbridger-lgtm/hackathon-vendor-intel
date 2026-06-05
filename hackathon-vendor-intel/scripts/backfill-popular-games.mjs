@@ -1,6 +1,8 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
+// Native MediaWiki/Wikidata API backfill.
+// This script does not depend on Codex Wikipedia MCP or any external skill runtime.
 const contactEmail = "gardner@bytedance.com";
 const appVersion = "gamemove/1.0";
 const userAgent = `${appVersion} (${contactEmail})`;
